@@ -5,7 +5,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Bidirectional, LSTM, Dense
 
 # Baca data
-file_path = 'output.csv'
+file_path = 'inflasibulanfix.csv'
 df = pd.read_csv(file_path)
 
 # Ambil kolom yang relevan
@@ -54,7 +54,7 @@ for city, data in city_data.items():
     models[city] = model
 
 # Contoh prediksi untuk suatu kota
-sample_city = 'KOTA BANDA ACEH'
+sample_city = 'KOTA YOGYAKARTA'
 input_data = scaler.transform(city_data[sample_city][-time_steps:].reshape(-1, 1))
 input_data = input_data.reshape((1, time_steps, n_features))
 predicted_inflation = models[sample_city].predict(input_data)
