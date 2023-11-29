@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">precapstone</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="doesn_t_have_account">Doesn\'t have account?</string>
+    <string name="login">Login</string>
+</resources>
