@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.view.signup.SignUpActivity">
+
+    <View
+        android:id="@+id/rounded_bg_signup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/rounded_corners"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/letsgettingtext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="@string/lets_getting_start"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="@+id/rounded_bg_signup"
+        app:layout_constraintStart_toStartOf="@+id/rounded_bg_signup"
+        app:layout_constraintTop_toTopOf="@+id/rounded_bg_signup" />
+
+    <TextView
+        android:id="@+id/signup_usernametext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/username"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/letsgettingtext"
+        app:layout_constraintStart_toStartOf="@+id/letsgettingtext"
+        app:layout_constraintTop_toBottomOf="@+id/letsgettingtext"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/edt_signup_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/person"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_usernametext"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/signup_emaildtext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/email"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/edt_signup_username"
+        app:layout_constraintStart_toStartOf="@+id/edt_signup_username"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signup_username" />
+
+    <EditText
+        android:id="@+id/edt_signup_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/email"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/signup_emaildtext"
+        app:layout_constraintStart_toStartOf="@+id/signup_emaildtext"
+        app:layout_constraintTop_toBottomOf="@+id/signup_emaildtext" />
+
+    <TextView
+        android:id="@+id/signup_passwordtext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/password"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/edt_signup_email"
+        app:layout_constraintStart_toStartOf="@+id/edt_signup_email"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signup_email" />
+
+    <EditText
+        android:id="@+id/edt_signup_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/lock"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/signup_passwordtext"
+        app:layout_constraintStart_toStartOf="@+id/signup_passwordtext"
+        app:layout_constraintTop_toBottomOf="@+id/signup_passwordtext" />
+
+
+    <TextView
+        android:id="@+id/text_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_account"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/blue_primary"
+        app:layout_constraintEnd_toEndOf="@+id/edt_signup_password"
+        app:layout_constraintStart_toStartOf="@+id/edt_signup_password"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signup_password" />
+
+    <Button
+        android:id="@+id/button_signup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_login"
+        app:layout_constraintStart_toStartOf="@+id/text_login"
+        app:layout_constraintTop_toBottomOf="@+id/text_login" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

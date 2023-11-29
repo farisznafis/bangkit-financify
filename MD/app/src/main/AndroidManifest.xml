@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Precapstone"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.signup.SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.login.LoginActivity"
             android:exported="false" />
         <activity
