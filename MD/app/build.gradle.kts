@@ -62,8 +62,16 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
-    testImplementation("androidx.arch.core:core-testing:2.2.0") // InstantTaskExecutorRule
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2") //TestDispatcher
+    //firebase authentication
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+
+    // InstantTaskExecutorRule
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    //TestDispatcher
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
     testImplementation("org.mockito:mockito-core:4.4.0")
     testImplementation("org.mockito:mockito-inline:4.4.0")
+
+
 }
