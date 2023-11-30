@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import com.code.presubmission.R
+import com.code.precapstone.R
 import com.google.android.material.textfield.TextInputEditText
 
 class CustomEditText: TextInputEditText {

@@ -9,4 +9,5 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="lets_getting_start">Let\'s Getting Started!</string>
+    <string name="password_error_message">password kurang dari 8 karakter</string>
 </resources>
