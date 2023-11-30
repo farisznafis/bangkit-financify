@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="@+id/edt_login_username"
         app:layout_constraintTop_toBottomOf="@+id/edt_login_username" />
 
-    <EditText
+    <com.code.precapstone.ui.customview.CustomEditText
         android:id="@+id/edt_login_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -88,7 +88,8 @@
         android:fontFamily="@font/robotomono_regular"
         app:layout_constraintEnd_toEndOf="@+id/login_passwordtext"
         app:layout_constraintStart_toStartOf="@+id/login_passwordtext"
-        app:layout_constraintTop_toBottomOf="@+id/login_passwordtext" />
+        app:layout_constraintTop_toBottomOf="@+id/login_passwordtext"/>
+
 
     <TextView
         android:id="@+id/text_register"

@@ -58,7 +58,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_usernametext"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor,TextFields" />
 
     <TextView
         android:id="@+id/signup_emaildtext"
@@ -80,7 +81,9 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/signup_emaildtext"
         app:layout_constraintStart_toStartOf="@+id/signup_emaildtext"
-        app:layout_constraintTop_toBottomOf="@+id/signup_emaildtext" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_emaildtext"
+        android:autofillHints="no"
+        android:inputType="textEmailAddress"/>
 
     <TextView
         android:id="@+id/signup_passwordtext"
@@ -93,13 +96,14 @@
         app:layout_constraintStart_toStartOf="@+id/edt_signup_email"
         app:layout_constraintTop_toBottomOf="@+id/edt_signup_email" />
 
-    <EditText
+    <com.code.precapstone.ui.customview.CustomEditText
         android:id="@+id/edt_signup_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_edittext"
         android:drawableStart="@drawable/lock"
         android:padding="15dp"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/signup_passwordtext"
         app:layout_constraintStart_toStartOf="@+id/signup_passwordtext"
         app:layout_constraintTop_toBottomOf="@+id/signup_passwordtext" />
