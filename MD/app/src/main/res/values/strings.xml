@@ -10,4 +10,9 @@
     <string name="register">Register</string>
     <string name="lets_getting_start">Let\'s Getting Started!</string>
     <string name="password_error_message">password kurang dari 8 karakter</string>
+    <string name="hi_username">Hi Username</string>
+    <string name="income">Income</string>
+    <string name="money_income">IDR 100.000</string>
+    <string name="money_expenses">IDR 100.000</string>
+    <string name="expenses">Expenses</string>
 </resources>
