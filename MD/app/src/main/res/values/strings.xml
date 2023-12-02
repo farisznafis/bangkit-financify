@@ -15,4 +15,5 @@
     <string name="money_income">IDR 100.000</string>
     <string name="money_expenses">IDR 100.000</string>
     <string name="expenses">Expenses</string>
+    <string name="history">History</string>
 </resources>
