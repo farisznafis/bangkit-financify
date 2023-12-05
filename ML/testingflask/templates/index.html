@@ -11,8 +11,18 @@
 
     <form action="/predict" method="post">
         <label for="city">City:</label>
-        <input type="text" name="city" required><br>
-
+        <!-- <input type="text" name="city" required><br> -->
+        <!-- city dropdown -->
+        <select name="city" id="city">
+            <!-- default option: Choose Your City -->
+            <option value="" disabled selected>Choose Your City</option>
+            <option value="MEUBALOH">Meubaloh</option>
+            <option value="BANDA ACEH">Banda Aceh</option>
+            <option value="LHOKSEUMAWE"></option>
+            <option value="Sibolga"></option>
+            <option value="Pematang Siantar"></option>
+        </select>
+        <br>
         <input type="submit" value="Predict">
     </form>
 </body>

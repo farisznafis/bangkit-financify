@@ -8,7 +8,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the Keras model
-model = load_model('all_cities_lstm_model.h5')
+model = load_model('./testingflask/all_cities_lstm_model.h5')
 
 # Initialize scaler
 scaler = MinMaxScaler()
