@@ -16,6 +16,9 @@
     {% if prediction is defined and trend is defined %}
         <h2>Predicted Inflation for {{ city }}: {{ prediction }}</h2>
         <p>Trend: {{ trend }}</p>
+        {% if time_required %}
+            <p>Time required to reach financial goal: {{ time_required[0] }} years and {{ time_required[1] }} months</p>
+        {% endif %}
     {% endif %}
 </body>
 </html>

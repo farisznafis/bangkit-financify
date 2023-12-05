@@ -8,7 +8,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the Keras model
-model = load_model('./testingflask/all_cities_lstm_model.h5')
+model = load_model('all_cities_lstm_model.h5')
 
 # Initialize scaler
 scaler = MinMaxScaler()
@@ -68,9 +68,13 @@ def predict():
     error = None
     prediction = None
     trend = None
+    time_required = None
 
     try:
         city = request.form['city']
+        goal = float(request.form['goal'])
+        income = float(request.form['income'])
+        expenses = float(request.form['expenses'])
         historical_inflation = city_data[city]
 
         input_data = scaler.transform(historical_inflation[-time_steps:].reshape(-1, 1))
@@ -94,10 +98,27 @@ def predict():
         else:
             trend = 'unchanged'
 
+        # Calculate time required to achieve the financial goal
+        time_required = calculate_time_to_goal(goal, income, expenses, prediction)
+        prediction = round(prediction, 2)
+
     except Exception as e:
         error = str(e)
 
-    return render_template('result.html', error=error, prediction=prediction, trend=trend)
+    return render_template('result.html', error=error, prediction=prediction, trend=trend, time_required=time_required)
+
+def calculate_time_to_goal(goal, income, expenses, savings):
+    # Calculate monthly savings
+    monthly_savings = income - expenses
+
+    # Calculate the number of months required to reach the goal
+    months_to_goal = int((goal - savings) / monthly_savings)
+
+    # Convert months to years and months
+    years_to_goal = months_to_goal // 12
+    remaining_months = months_to_goal % 12
+
+    return years_to_goal, remaining_months
 
 if __name__ == '__main__':
     app.run(debug=True)
