@@ -16,4 +16,8 @@
     <string name="money_expenses">IDR 100.000</string>
     <string name="expenses">Expenses</string>
     <string name="history">History</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+    <string name="fab">FAB</string>
+    <string name="sambutan">Hi! Username</string>
 </resources>
