@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".ui.view.signup.SignUpActivity">
+    tools:context=".view.signup.SignUpActivity">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/money_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/letsgettingtext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <View
         android:id="@+id/rounded_bg_signup"
@@ -102,7 +113,7 @@
         app:layout_constraintStart_toStartOf="@+id/edt_signup_email"
         app:layout_constraintTop_toBottomOf="@+id/edt_signup_email" />
 
-    <com.code.precapstone.ui.customview.CustomEditText
+    <com.code.precapstone.customview.CustomEditText
         android:id="@+id/edt_signup_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -126,7 +137,7 @@
         android:gravity="center"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/blue_primary"
+        android:textColor="@color/green_400"
         app:layout_constraintEnd_toEndOf="@+id/edt_signup_password"
         app:layout_constraintStart_toStartOf="@+id/edt_signup_password"
         app:layout_constraintTop_toBottomOf="@+id/edt_signup_password" />

@@ -1,0 +1,13 @@
+<!-- res/drawable/shape_with_stroke.xml -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <stroke
+        android:color="@color/grey_stroke"
+        android:width="3dp" />
+
+    <corners android:radius="20dp" />
+    <solid android:color="@color/white" />
+
+</shape>

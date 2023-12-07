@@ -1,11 +1,11 @@
-package com.code.precapstone.ui.view.signup
+package com.code.precapstone.view.signup
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.code.precapstone.databinding.ActivitySignUpBinding
-import com.code.precapstone.ui.view.login.LoginActivity
+import com.code.precapstone.view.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : AppCompatActivity() {

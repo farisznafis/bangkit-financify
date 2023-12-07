@@ -23,18 +23,32 @@
         android:layout_width="180dp"
         android:layout_height="100dp"
         android:layout_marginTop="18dp"
-        android:backgroundTint="@color/blue_primary"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="@+id/sambutan"
-        app:layout_constraintTop_toBottomOf="@+id/sambutan" />
+        app:layout_constraintTop_toBottomOf="@+id/sambutan">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/income_background"
+            android:layout_height="match_parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewdua"
         android:layout_width="180dp"
         android:layout_height="100dp"
         android:layout_marginTop="18dp"
-        android:backgroundTint="@color/blue_primary"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="@+id/sambutan"
-        app:layout_constraintTop_toBottomOf="@+id/sambutan" />
+        app:layout_constraintTop_toBottomOf="@+id/sambutan">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/expenses_background">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvhistory"
@@ -53,7 +67,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvhistory">
@@ -65,27 +79,30 @@
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/fab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:backgroundTint="?android:attr/windowBackground"
-        app:menu="@menu/menu"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="70dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/fab" />
+
+
+    <ImageView
+        android:id="@+id/ivsetting"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/setting_icon_description"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="@+id/sambutan"
+        app:layout_constraintTop_toTopOf="@+id/sambutan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

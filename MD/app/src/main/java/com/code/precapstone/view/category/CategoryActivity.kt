@@ -1,12 +1,12 @@
-package com.code.precapstone.ui.view.calculation
+package com.code.precapstone.view.category
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.code.precapstone.R
 
-class CalculationActivity : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calculation)
+        setContentView(R.layout.activity_category)
     }
 }

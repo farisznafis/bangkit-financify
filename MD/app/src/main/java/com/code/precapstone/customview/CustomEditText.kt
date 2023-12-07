@@ -1,4 +1,4 @@
-package com.code.precapstone.ui.customview
+package com.code.precapstone.customview
 
 import android.content.Context
 import android.text.Editable

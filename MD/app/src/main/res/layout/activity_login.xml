@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".ui.view.login.LoginActivity">
+    tools:context=".view.login.LoginActivity">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/login_header_image"
+        app:layout_constraintBottom_toTopOf="@+id/rounded_bg_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <View
         android:id="@+id/rounded_bg_login"
@@ -75,7 +85,7 @@
         app:layout_constraintStart_toStartOf="@+id/edt_login_email"
         app:layout_constraintTop_toBottomOf="@+id/edt_login_email" />
 
-    <com.code.precapstone.ui.customview.CustomEditText
+    <com.code.precapstone.customview.CustomEditText
         android:id="@+id/edt_login_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -99,7 +109,7 @@
         android:gravity="center"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/blue_primary"
+        android:textColor="@color/green_400"
         app:layout_constraintEnd_toEndOf="@+id/edt_login_password"
         app:layout_constraintStart_toStartOf="@+id/edt_login_password"
         app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />

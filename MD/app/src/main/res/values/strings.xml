@@ -27,5 +27,18 @@
     <string name="account">Account</string>
     <string name="fab">FAB</string>
     <string name="sambutan">Hi! Username</string>
+    <string name="setting_icon_description">setting_icon</string>
+    <string name="pilih_kategori_text">Ayo pilih kategorimu!</string>
+    <string name="mobil_text">Mobil</string>
+    <string name="rencanakan_pembelian_mobilmu_di_financify">Rencanakan pembelian mobil impianmu di Financify!</string>
+    <string name="pernikahan">Pernikahan</string>
+    <string name="gadget">Gadget</string>
+    <string name="rencanakan_pembelian_gadget_impianmu_di_financify">Rencanakan pembelian gadget impianmu di Financify!</string>
+    <string name="rencanakan_anggaran_pernikahan_impianmu_di_financify">Rencanakan anggaran pernikahan impianmu di Financify!</string>
+    <string name="mobil">Mobil</string>
+    <string name="rencanakan_anggaran_liburanmu_bersama_financify">Rencanakan anggaran liburanmu bersama Financify!</string>
+    <string name="traveling">Traveling</string>
+    <string name="pendidikan">Pendidikan</string>
+    <string name="text_back">Kembali</string>
 
 </resources>

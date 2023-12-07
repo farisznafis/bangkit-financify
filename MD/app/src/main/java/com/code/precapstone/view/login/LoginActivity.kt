@@ -1,4 +1,4 @@
-package com.code.precapstone.ui.view.login
+package com.code.precapstone.view.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.code.precapstone.R
 import com.code.precapstone.databinding.ActivityLoginBinding
-import com.code.precapstone.ui.view.main.MainActivity
-import com.code.precapstone.ui.view.signup.SignUpActivity
+import com.code.precapstone.view.main.MainActivity
+import com.code.precapstone.view.signup.SignUpActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
                     .show()
             }
         }
-
 
 
         tvRegister.setOnClickListener{

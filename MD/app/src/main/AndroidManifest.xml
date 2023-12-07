@@ -13,13 +13,16 @@
         android:theme="@style/Theme.Precapstone"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.calculation.CalculationActivity"
+            android:name=".view.category.CategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.signup.SignUpActivity"
+            android:name=".view.calculation.CalculationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.login.LoginActivity"
+            android:name=".view.signup.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +31,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.view.main.MainActivity"
-            android:exported="true"></activity>
+            android:name=".view.main.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
