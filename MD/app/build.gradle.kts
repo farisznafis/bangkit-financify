@@ -69,6 +69,9 @@ dependencies {
     // InstantTaskExecutorRule
     testImplementation("androidx.arch.core:core-testing:2.2.0")
 
+    //fragment
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.5")
     //TestDispatcher
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     testImplementation("org.mockito:mockito-core:4.4.0")

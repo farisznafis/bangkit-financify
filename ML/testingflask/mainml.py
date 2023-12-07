@@ -12,8 +12,13 @@ df = pd.read_csv(file_path)
 # Select relevant columns
 df = df[['City', 'Month', 'Year', 'Inflation']]
 
-# Replace commas with dots in the 'Inflation' column
-df['Inflation'] = df['Inflation'].str.replace(',', '.').astype(float)
+# Remove 'KOTA' from the 'City' column
+df['City'] = df['City'].str.replace('KOTA ', '', regex=False)
+
+# Check if 'Inflation' column already contains numeric values
+if not pd.api.types.is_numeric_dtype(df['Inflation']):
+    # Replace commas with dots in the 'Inflation' column
+    df['Inflation'] = df['Inflation'].str.replace(',', '.').astype(float)
 
 # Sort the data
 df = df.sort_values(by=['City', 'Year', 'Month'])
@@ -26,6 +31,9 @@ df['Inflation'] = scaler.fit_transform(df['Inflation'].values.reshape(-1, 1))
 city_data = {}
 for city in df['City'].unique():
     city_data[city] = df[df['City'] == city]['Inflation'].values
+
+# Combine data for all cities into a single time series
+all_cities_data = np.concatenate(list(city_data.values()))
 
 # Function to create time series sequences
 def create_time_series(data, time_steps=1):
@@ -40,25 +48,25 @@ def create_time_series(data, time_steps=1):
 time_steps = 12
 n_features = 1
 
-# Create and train LSTM model for each city
-models = {}
-for city, data in city_data.items():
-    X, y = create_time_series(data, time_steps)
-    X = X.reshape((X.shape[0], X.shape[1], n_features))
-    
-    model = Sequential()
-    model.add(Bidirectional(LSTM(50, activation='relu'), input_shape=(time_steps, n_features)))
-    model.add(Dense(1))
-    model.compile(optimizer='adam', loss='mse')
-    model.fit(X, y, epochs=50, verbose=0)
-    
-    models[city] = model
+# Create time series for all cities
+X_all, y_all = create_time_series(all_cities_data, time_steps)
+X_all = X_all.reshape((X_all.shape[0], X_all.shape[1], n_features))
+
+# Create and train a single LSTM model for all cities
+model = Sequential()
+model.add(Bidirectional(LSTM(50, activation='relu'), input_shape=(time_steps, n_features)))
+model.add(Dense(1))
+model.compile(optimizer='adam', loss='mse')
+model.fit(X_all, y_all, epochs=50, verbose=0)
+
+# Save the Keras model in the native format
+model.save('all_cities_lstm_model.h5')
 
 # Example prediction for a city
-sample_city = 'KOTA YOGYAKARTA'
+sample_city = 'YOGYAKARTA'
 input_data = scaler.transform(city_data[sample_city][-time_steps:].reshape(-1, 1))
 input_data = input_data.reshape((1, time_steps, n_features))
-predicted_inflation = models[sample_city].predict(input_data)
+predicted_inflation = model.predict(input_data)
 
 # Inverse transform the prediction to get the actual value
 predicted_inflation_actual = scaler.inverse_transform(predicted_inflation.reshape(-1, 1))
@@ -77,6 +85,3 @@ else:
     trend = 'unchanged'
 
 print(f'Trend for {sample_city} inflation: {trend}')
-
-# Save the Keras model in the native format
-models[sample_city].save('lstm_model.h5')
