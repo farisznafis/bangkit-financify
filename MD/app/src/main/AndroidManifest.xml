@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Precapstone"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.calculation.CalculationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.signup.SignUpActivity"
             android:exported="false" />
         <activity
@@ -26,8 +29,7 @@
         </activity>
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

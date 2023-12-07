@@ -16,4 +16,9 @@
     <string name="money_expenses">IDR 100.000</string>
     <string name="expenses">Expenses</string>
     <string name="history">History</string>
+    <string name="letscalculate">Ayo Hitung Keuangan Mu!!!</string>
+    <string name="goals">Masukkan tujuan keuangan Anda</string>
+    <string name="income_input">Masukkan pendapatan per bulan Anda</string>
+    <string name="expenses_input">Masukkan pengeluaran per bulan Anda</string>
+    <string name="hitung">Hitung</string>
 </resources>
