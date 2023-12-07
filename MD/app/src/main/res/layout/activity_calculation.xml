@@ -19,18 +19,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/text_back"
+        android:textColor="@color/green_400"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/back_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/letscalculate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
         android:text="@string/letscalculate"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="@+id/rounded_bg_calculation"
         app:layout_constraintStart_toStartOf="@+id/rounded_bg_calculation"
-        app:layout_constraintTop_toTopOf="@+id/rounded_bg_calculation" />
+        app:layout_constraintTop_toBottomOf="@+id/back_icon" />
 
     <TextView
         android:id="@+id/financial_goals"
@@ -38,7 +61,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/goals"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
         app:layout_constraintEnd_toEndOf="@+id/letscalculate"
         app:layout_constraintStart_toStartOf="@+id/letscalculate"
         app:layout_constraintTop_toBottomOf="@+id/letscalculate"
