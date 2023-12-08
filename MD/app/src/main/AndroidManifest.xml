@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Precapstone"
         tools:targetApi="31">
         <activity
+            android:name=".view.setting.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.category.CategoryActivity"
             android:exported="false" />
         <activity
