@@ -77,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="@string/mobil"
+                android:text="@string/kendaraan"
                 android:textSize="24sp"
                 android:layout_marginStart="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/rencanakan_pembelian_mobilmu_di_financify"
+                android:text="@string/rencanakan_pembelian_kendaraanmu_di_financify"
                 app:layout_constraintEnd_toEndOf="@+id/tvCarCategory"
                 app:layout_constraintStart_toStartOf="@+id/tvCarCategory"
                 app:layout_constraintTop_toBottomOf="@+id/tvCarCategory" />
@@ -302,7 +302,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/rencanakan_anggaran_liburanmu_bersama_financify"
+                android:text="@string/rencanakan_anggaran_pendidikanmu_bersama_financify"
                 app:layout_constraintEnd_toEndOf="@+id/tvEducationCategory"
                 app:layout_constraintStart_toStartOf="@+id/tvEducationCategory"
                 app:layout_constraintTop_toBottomOf="@+id/tvEducationCategory" />
