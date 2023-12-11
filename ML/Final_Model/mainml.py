@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Bidirectional, LSTM, Dense
 import tensorflow as tf
 
 # Load data
-file_path = 'inflasibulanfix.csv'
+file_path = './Dataset/inflasibulanfix_v2.csv'
 df = pd.read_csv(file_path)
 
 # Select relevant columns
@@ -60,7 +60,7 @@ model.compile(optimizer='adam', loss='mse')
 model.fit(X_all, y_all, epochs=50, verbose=0)
 
 # Save the Keras model in the native format
-model.save('all_cities_lstm_model.h5')
+model.save('./Final Model/all_cities_lstm_model_v2.h5')
 
 # Example prediction for a city
 sample_city = 'YOGYAKARTA'

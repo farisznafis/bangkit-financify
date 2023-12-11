@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Path ke file CSV pertama
-file_path1 = 'C:/Users/WIN10/OneDrive/Documents/Bangkit/Final Model/inflasibulanv2.csv'
+file_path1 = './Dataset/inflasibulanv2.csv'
 
 # Membaca file CSV pertama
 df = pd.read_csv(file_path1)
@@ -21,4 +21,4 @@ print(df_result)
 
 
 # Menyimpan DataFrame ke dalam file CSV
-df_result.to_csv('inflasibulanfixv2.csv', index=False)
+df_result.to_csv('./Dataset/inflasibulanfix_v2.csv', index=False)
