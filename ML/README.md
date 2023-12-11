@@ -12,7 +12,7 @@ app.py = main file to deploy the model using Flask
 ### Dataset
 Dataset used to make the model
 
-inflasibulanfix-v2.csv = updated dataset until december 2022
+inflasibulanfix_v2.csv = updated dataset until december 2022
 
 ## Testing
 Testing files and models (for experiments)
