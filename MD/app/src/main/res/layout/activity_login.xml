@@ -9,9 +9,9 @@
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:src="@drawable/login_header_image"
-        app:layout_constraintBottom_toTopOf="@+id/rounded_bg_login"
+        android:layout_height="wrap_content"
+        android:src="@drawable/money_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/welcometext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

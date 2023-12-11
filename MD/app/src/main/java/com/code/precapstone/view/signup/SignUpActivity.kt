@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySignUpBinding
+    private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +32,11 @@ class SignUpActivity : AppCompatActivity() {
                 firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
                     if(it.isSuccessful){
                         val intent = Intent(this, LoginActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                         startActivity(intent)
-                    }else{
+                        finish()
+                    }
+                    else{
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
                             .show()
                     }
