@@ -14,7 +14,7 @@ model = load_model('./Final Model/all_cities_lstm_model_v2.h5')
 scaler = MinMaxScaler()
 
 # Load data
-file_path = './Final Model/inflasibulanfixv2.csv'
+file_path = './Final Model/inflasibulanfix_v2.csv'
 df = pd.read_csv(file_path)
 
 # Select relevant columns
