@@ -8,13 +8,13 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the Keras model
-model = load_model('all_cities_lstm_model.h5')
+model = load_model('./Final Model/all_cities_lstm_model_v2.h5')
 
 # Initialize scaler
 scaler = MinMaxScaler()
 
 # Load data
-file_path = 'inflasibulanfix.csv'
+file_path = './Final Model/inflasibulanfixv2.csv'
 df = pd.read_csv(file_path)
 
 # Select relevant columns
