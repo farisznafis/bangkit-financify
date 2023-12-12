@@ -69,6 +69,7 @@ def predict():
     prediction = None
     trend = None
     time_required = None
+    time_required_predicted = None
 
     try:
         city = request.form['city']
@@ -98,14 +99,17 @@ def predict():
         else:
             trend = 'unchanged'
 
-        # Calculate time required to achieve the financial goal
-        time_required = calculate_time_to_goal(goal, income, expenses, prediction)
-        prediction = round(prediction, 2)
+        # Calculate time required based on predicted inflation
+        time_required_predicted = calculate_time_to_goal(goal, income, expenses, prediction)
+
+        prediction = round(prediction * 10, 2)
 
     except Exception as e:
         error = str(e)
 
-    return render_template('result.html', error=error, prediction=prediction, trend=trend, time_required=time_required)
+    return render_template('result.html', error=error, prediction=prediction, trend=trend,
+                           time_required=time_required, time_required_predicted=time_required_predicted)
+
 
 def calculate_time_to_goal(goal, income, expenses, savings):
     # Calculate monthly savings

@@ -2,9 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <!-- ... -->
 </head>
 <body>
     <h1>Result</h1>
@@ -14,10 +12,10 @@
     {% endif %}
 
     {% if prediction is defined and trend is defined %}
-        <h2>Predicted Inflation for {{ city }}: {{ prediction }}</h2>
+        <h2>Predicted Inflation for {{ city }}: {{ prediction }}%</h2>
         <p>Trend: {{ trend }}</p>
-        {% if time_required %}
-            <p>Time required to reach financial goal: {{ time_required[0] }} years and {{ time_required[1] }} months</p>
+        {% if time_required_predicted %}
+            <p>Time required with predicted inflation: {{ time_required_predicted[0] }} years and {{ time_required_predicted[1] }} months</p>
         {% endif %}
     {% endif %}
 </body>
