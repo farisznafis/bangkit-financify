@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.code.precapstone.R
 import com.code.precapstone.databinding.ActivityMainBinding
+import com.code.precapstone.view.category.CategoryActivity
 import com.code.precapstone.view.setting.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.ivSetting.setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.fab.setOnClickListener{
+            val intent = Intent(this, CategoryActivity::class.java)
             startActivity(intent)
         }
 
