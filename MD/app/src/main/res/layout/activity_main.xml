@@ -4,105 +4,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#4bb692">
+
+    <ImageView
+        android:id="@+id/ivSetting"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sambutan"
-        android:layout_width="0dp"
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/sambutan"
+        android:fontFamily="@font/poppins_bolditalic"
+        android:text="Financify"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewsatu"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="18dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="@+id/sambutan"
-        app:layout_constraintTop_toBottomOf="@+id/sambutan">
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="20dp"
+        app:cardBackgroundColor="#FCFCFC"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@drawable/income_background"
             android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/username"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewdua"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="18dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="@+id/sambutan"
-        app:layout_constraintTop_toBottomOf="@+id/sambutan">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/expenses_background">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tvhistory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/history"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/cardViewsatu"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewsatu" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_container"
+    <View
+        android:id="@+id/bg_homepage"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/homepage_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvhistory">
+        app:layout_constraintTop_toTopOf="parent">
+    </View>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvitem"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/fab"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/history"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_homepage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bg_homepage"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-
-    <ImageView
-        android:id="@+id/ivsetting"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="5dp"
-        android:contentDescription="@string/setting_icon_description"
-        android:src="@drawable/setting"
-        app:layout_constraintEnd_toEndOf="@+id/sambutan"
-        app:layout_constraintTop_toTopOf="@+id/sambutan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
