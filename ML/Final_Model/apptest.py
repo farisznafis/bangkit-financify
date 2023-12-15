@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
@@ -97,21 +97,15 @@ def predict():
             trend = 'unchanged'
 
         # Calculate time required based on predicted inflation
-        years_to_goal, remaining_months = calculate_time_to_goal(goal, income, expenses, prediction)
+        time_required_predicted = calculate_time_to_goal(goal, income, expenses, prediction)
 
         prediction = round(prediction * 100, 2)
 
     except Exception as e:
         error = str(e)
 
-    return jsonify({
-        "prediction": prediction,
-        "trend": trend,
-        "time_required": {
-            "years_to_goal": years_to_goal,
-            "remaining_months": remaining_months
-        }
-    })
+    return render_template('result.html', error=error, prediction=prediction, trend=trend,
+                           time_required=time_required, time_required_predicted=time_required_predicted)
 
 def calculate_time_to_goal(goal, income, expenses, savings):
     # Calculate monthly savings
