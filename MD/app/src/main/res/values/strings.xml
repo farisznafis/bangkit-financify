@@ -18,7 +18,7 @@
     <string name="history">History</string>
 
     <string name="letscalculate">Ayo Hitung Keuanganmu!</string>
-    <string name="goals">Masukkan tujuan keuangan Anda</string>
+    <string name="goals">Masukkan tujuan nominal keuangan Anda</string>
     <string name="income_input">Masukkan pendapatan per bulan Anda</string>
     <string name="expenses_input">Masukkan pengeluaran per bulan Anda</string>
     <string name="hitung">Hitung</string>
@@ -45,5 +45,6 @@
     <string name="news_article">News Article</string>
     <string name="txt_bookmarks">Bookmarks</string>
     <string name="txt_share">Share</string>
+    <string name="masukan_kota_dalam_huruf_kapital">Masukan Kota dalam huruf Kapital</string>
 
 </resources>

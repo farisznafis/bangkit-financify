@@ -10,7 +10,6 @@
         android:id="@+id/rounded_bg_calculation"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="0dp"
         android:background="@drawable/rounded_corners"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,19 +54,46 @@
         app:layout_constraintStart_toStartOf="@+id/rounded_bg_calculation"
         app:layout_constraintTop_toBottomOf="@+id/back_icon" />
 
+
+    <TextView
+        android:id="@+id/tvKota"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/masukan_kota_dalam_huruf_kapital"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/letscalculate"
+        app:layout_constraintStart_toStartOf="@+id/letscalculate"
+        app:layout_constraintTop_toBottomOf="@+id/letscalculate"/>
+
+    <EditText
+        android:id="@+id/edt_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/robotomono_regular"
+        android:padding="15dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvKota" />
+
     <TextView
         android:id="@+id/financial_goals"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/goals"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-
-        app:layout_constraintEnd_toEndOf="@+id/letscalculate"
-        app:layout_constraintStart_toStartOf="@+id/letscalculate"
-        app:layout_constraintTop_toBottomOf="@+id/letscalculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_city"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -154,10 +180,10 @@
         android:fontFamily="@font/poppins_bold"
         android:text="@string/hitung"
         android:textColor="@color/white"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edt_monthly_expenses"
-        app:layout_constraintStart_toStartOf="@+id/edt_monthly_expenses"
-        app:layout_constraintTop_toBottomOf="@+id/edt_monthly_expenses" />
+        app:layout_constraintStart_toStartOf="@+id/edt_monthly_expenses" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

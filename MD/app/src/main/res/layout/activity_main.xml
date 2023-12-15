@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4bb692">
+    android:background="@color/green_200">
 
     <ImageView
         android:id="@+id/ivSetting"
@@ -17,10 +17,11 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <TextView
+    <ImageView
         android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/logo"
         android:fontFamily="@font/poppins_bolditalic"
         android:text="Financify"
         android:textColor="@color/white"
@@ -43,7 +44,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_height="280dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="20dp"
@@ -57,17 +58,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="disini tempat berita"
-                android:textSize="24sp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -88,7 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/history"
         android:textSize="20sp"
@@ -100,7 +103,7 @@
         android:id="@+id/rvItem"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="10dp"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/bg_homepage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/bg_homepage"
