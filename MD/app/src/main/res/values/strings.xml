@@ -46,5 +46,6 @@
     <string name="txt_bookmarks">Bookmarks</string>
     <string name="txt_share">Share</string>
     <string name="masukan_kota_dalam_huruf_kapital">Masukan Kota dalam huruf Kapital</string>
+    <string name="detail">Detail</string>
 
 </resources>
