@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.code.precapstone.R
 import com.code.precapstone.databinding.ActivitySettingsBinding
 import com.code.precapstone.view.login.LoginActivity
+import com.code.precapstone.view.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity() {
@@ -14,7 +15,10 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.tvBack.setOnClickListener{
+            val intent = Intent(this@SettingsActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnLogout.setOnClickListener{
             logoutUser()
         }
