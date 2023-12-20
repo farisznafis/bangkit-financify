@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_200">
+    android:background="@color/green_400">
 
     <ImageView
         android:id="@+id/ivSetting"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_margin="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +27,7 @@
         android:text="Financify"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

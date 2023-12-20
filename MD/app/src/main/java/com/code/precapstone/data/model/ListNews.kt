@@ -103,7 +103,5 @@ class ListNews {
             "https://www.cnnindonesia.com/ekonomi/20230616203217-83-963004/strategi-membeli-rumah-bagi-pekerja-single-bergaji-rp8-juta",
         )
 
-
-
         )
 }

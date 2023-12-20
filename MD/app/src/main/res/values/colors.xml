@@ -4,7 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue_primary">#427D9D</color>
     <color name="green_200">#A6CF98</color>
-    <color name="green_400">#557C55</color>
+    <color name="green_400">#42A186</color>
+    <color name="green_600">#557C55</color>
     <color name="red_200">#F96666</color>
     <color name="red_400">#DF2E38</color>
     <color name="grey_stroke">#B9B4C7</color>
