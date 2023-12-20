@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //menampilkan berita
-        val rv = binding.rvNews
+        val rv = binding.rvItem
         val newsAdapter = NewsAdapter(ListNews().dummyListNews)
         rv.adapter = newsAdapter
         rv.layoutManager = LinearLayoutManager(this)
