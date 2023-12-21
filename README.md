@@ -6,6 +6,19 @@ Welcome to the Financify repository! This repository contains an efficient machi
 
 The main goal of this project is to assist in the automated prediction of inflation into specific years or months. By leveraging machine learning techniques, we aim to contribute to Education, Learning, and Personal Development efforts.
 
+### Team
+
+|   Learning Path    | Name                           | ID Bangkit       |                       University                               | 
+| ------------------ | -------------------------------|------------------|----------------------------------------------------------------|
+| Machine Learning   | Ahmad Rizgifan Fauzhy          | M179BSY1349      | Universitas Ahmad Dahlan                                       |
+| Machine Learning   | Faris Zaidan Nafis             | M008BSY0432      | University of Gadjah Mada                                      |
+| Machine Learning   | T.M. Fathin Rifat              | M008BSY0920      | University of Gadjah Mada                                      |
+| Cloud Computing    | Mochammad Shandy Ferdiansyach  | C008BSY3771      | University of Gadjah Mada                                      |
+| Cloud Computing    | Herdian Aji Laksana            | C159BSY3680      | Universitas Teknologi Digital Indonesia                        |
+| Mobile Development | Lalu Bagoes Putra Ramadhan     | A179BSY2343      | Universitas Ahmad Dahlan                                       |
+| Mobile Development | Charlos Matio Simanjuntak      | A172BSY2841      | Universtas Mikroskil                                           |
+
+
 ## Dataset
 
 We used a custom inflation dataset for training the model. This dataset is available for download from the following link: [Custom Inflastion Dataset](https://github.com/farisznafis/bangkit-financify/tree/main/ML). The Dataset contains samples of different inflation rate in Indonesia for each month or years allowing our model to effectively predict inflation rates.
