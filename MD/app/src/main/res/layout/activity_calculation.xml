@@ -205,13 +205,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:text="1 Tahun 8 Bulan"
+        tools:text="1 Tahun 8 Bulan"
         android:textSize="15sp"
         android:layout_marginTop="10dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
+    
 
     <Button
         android:id="@+id/button_calculate"
@@ -225,6 +226,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edt_monthly_expenses"
         app:layout_constraintStart_toStartOf="@+id/edt_monthly_expenses" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

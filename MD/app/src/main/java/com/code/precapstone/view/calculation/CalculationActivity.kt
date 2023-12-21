@@ -1,11 +1,17 @@
 package com.code.precapstone.view.calculation
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.code.precapstone.R
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.code.precapstone.data.response.InflationResponse
+import com.code.precapstone.data.retrofit.ApiConfig
 import com.code.precapstone.databinding.ActivityCalculationBinding
 import com.code.precapstone.view.category.CategoryActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CalculationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalculationBinding
@@ -22,8 +28,36 @@ class CalculationActivity : AppCompatActivity() {
             }
 
             binding.buttonCalculate.setOnClickListener {
-                //TODO
+                val city = binding.edtCity.text.toString()
+                val goal = binding.edtFinancialGoals.text.toString().toFloat()
+                val income = binding.edtMonthlyIncome.text.toString().toFloat()
+                val expenses = binding.edtMonthlyExpenses.text.toString().toFloat()
+
+                val client = ApiConfig.getApiService().predict(city,goal,income,expenses)
+                client.enqueue(object : Callback<InflationResponse>{
+                    @SuppressLint("SetTextI18n")
+                    override fun onResponse(
+                        call: Call<InflationResponse>,
+                        response: Response<InflationResponse>
+                    ) {
+                        if(response.isSuccessful){
+                            val prediction = response.body()
+                            Log.e("berhasil", "RESULT: ${prediction?.timeRequired?.yearsToGoal}", )
+                            binding.tvHasilPrediksiBulan.text = "${prediction?.timeRequired?.yearsToGoal} Tahun ${prediction?.timeRequired?.remainingMonths} Bulan"
+                        }else{
+                            Log.e("gagal", "RESULT ${response.message()}", )
+                        }
+                    }
+
+                    override fun onFailure(call: Call<InflationResponse>, t: Throwable) {
+                        Log.e("gagal", "onFailure: ${t.message.toString()}", )
+                    }
+
+                })
+
             }
         }
     }
 }
+
+

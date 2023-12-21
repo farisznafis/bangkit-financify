@@ -24,7 +24,7 @@ class ApiConfig {
 
             //buat nge fetch API nya ini nih
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.financify.com/") //ganti ini ngab kalo API nya udah dikasi
+                .baseUrl("https://financify-hhof4y5xyq-et.a.run.app") //ganti ini ngab kalo API nya udah dikasi
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
