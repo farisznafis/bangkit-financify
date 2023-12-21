@@ -22,6 +22,13 @@ class SettingsActivity : AppCompatActivity() {
         binding.btnLogout.setOnClickListener{
             logoutUser()
         }
+
+        binding.nextIcon.setOnClickListener{
+            val intent = Intent(this@SettingsActivity, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
     private fun logoutUser() {
         FirebaseAuth.getInstance().signOut()
