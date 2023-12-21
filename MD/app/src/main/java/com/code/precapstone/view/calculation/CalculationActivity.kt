@@ -16,6 +16,7 @@ import retrofit2.Response
 
 class CalculationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalculationBinding
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCalculationBinding.inflate(layoutInflater)
@@ -28,6 +29,10 @@ class CalculationActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
+            val categoryText = intent.getStringExtra("categoryText")
+            if(categoryText != null){
+                binding.financialGoals.setText("Masukan harga ${categoryText} yang anda inginkan")
+            }
             binding.buttonCalculate.setOnClickListener {
                 val city = binding.edtCity.text.toString()
                 val goal = binding.edtFinancialGoals.text.toString().toFloat()

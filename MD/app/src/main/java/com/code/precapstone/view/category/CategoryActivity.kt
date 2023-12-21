@@ -24,25 +24,31 @@ class CategoryActivity : AppCompatActivity() {
         binding.apply {
 
             binding.cvCategory1.setOnClickListener{
-                val intent = Intent(this@CategoryActivity, CalculationActivity::class.java)
-                startActivity(intent)
+                val kategoriKendaraanText = binding.tvCarCategory.text.toString()
+                startActivity(kategoriKendaraanText)
             }
             binding.cvCategory2.setOnClickListener{
-                val intent = Intent(this@CategoryActivity, CalculationActivity::class.java)
-                startActivity(intent)
+                val kategoriGadgetText = binding.tvPhoneCategory.text.toString()
+                startActivity(kategoriGadgetText)
             }
             binding.cvCategory3.setOnClickListener{
-                val intent = Intent(this@CategoryActivity, CalculationActivity::class.java)
-                startActivity(intent)
+                val kategoriPernikahanText = binding.tvMariageCategory.text.toString()
+                startActivity(kategoriPernikahanText)
             }
             binding.cvCategory4.setOnClickListener{
-                val intent = Intent(this@CategoryActivity, CalculationActivity::class.java)
-                startActivity(intent)
+                val kategoriTravelingText = binding.tvTravelCategory.text.toString()
+                startActivity(kategoriTravelingText)
             }
             binding.cvCategory5.setOnClickListener{
-                val intent = Intent(this@CategoryActivity, CalculationActivity::class.java)
-                startActivity(intent)
+                val kategoriPendidikanText = binding.tvEducationCategory.text.toString()
+                startActivity(kategoriPendidikanText)
             }
         }
+    }
+
+    fun startActivity(categoryText: String){
+        val intent = Intent(this@CategoryActivity, CalculationActivity::class.java)
+        intent.putExtra("categoryText", categoryText)
+        startActivity(intent)
     }
 }
