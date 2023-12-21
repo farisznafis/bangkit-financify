@@ -2,6 +2,7 @@ package com.code.precapstone.view.calculation
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,14 @@ class CalculationActivity : AppCompatActivity() {
                             val prediction = response.body()
                             Log.e("berhasil", "RESULT: ${prediction?.timeRequired?.yearsToGoal}", )
                             binding.tvHasilPrediksiBulan.text = "${prediction?.timeRequired?.yearsToGoal} Tahun ${prediction?.timeRequired?.remainingMonths} Bulan"
+                           val trend = prediction?.trend
+                            binding.tvTrendInflasi.text = "$trend"
+
+                            when(trend){
+                                "up" -> binding.tvTrendInflasi.setTextColor(Color.RED)
+                                "down" -> binding.tvTrendInflasi.setTextColor(Color.GREEN)
+                                else -> binding.tvTrendInflasi.setTextColor(Color.BLACK)
+                            }
                         }else{
                             Log.e("gagal", "RESULT ${response.message()}", )
                         }
