@@ -50,7 +50,7 @@ To get started with the Financify ML Prediction Model, follow these steps:
    ```
 
 ## Install the Application
-1. Download the APK here [here](https://drive.google.com/drive/folders/1D44SDDfidnkOILcNexFP3__9mw3odlQX?usp=drive_link)
+1. Download the APK [here](https://drive.google.com/drive/folders/1D44SDDfidnkOILcNexFP3__9mw3odlQX?usp=drive_link)
 2. Provide permissions to perform installation applications from outside parties.
 3. Install the application by pressing the install button that appears.
 
