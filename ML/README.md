@@ -29,7 +29,7 @@ Fixed files and models that can used to deploy
 ### Dataset
 Dataset used to make the model
 
-inflasi_v3.csv = updated dataset until november 2023
+  - inflasi_v3.csv = updated dataset until november 2023
 
 ## Testing
 Testing files and models (for experiments)
