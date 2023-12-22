@@ -4,7 +4,6 @@
 
 ## About The Model :
   - Developed with Bidirectional Long Short-Term Memory (LSTM) architecture, our model predicts inflation trends. Exported as .h5, it's deployed via Flask for user-friendly, real-time predictions.
-  - This version of the model is the local version. This model uses a local database (not including credential keys). This repository also includes the development models that we have built.
 
 ## ML team responsibilities : 
   - Collect and prepare a dataset.
