@@ -1,4 +1,7 @@
-# CC-Financify
+# Cloud Computing Path Folder
+
+# Financify-CC
+
 ## Financify Cloud Computing :
   - App's infrastructure is Google Cloud with Python as the primary language, and Flask serves as the framework for our API. Acting as a bridge for user input, our API facilitates machine learning training and output generation. The entire codebase is encapsulated in a Docker image, which is then pushed to the Google Cloud Container Registry. Once the Docker image is in the container registry, we deploy it via Cloud Run, thus allowing access for the mobile development team.
 

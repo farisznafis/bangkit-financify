@@ -1,4 +1,6 @@
-# Financify
+# Mobile Development Path Folder
+
+# Financify-MD
 
 A capstone project called Financify helps Gen Z set their savings goals while keeping an eye on inflation, and users get information about it.
 
