@@ -21,7 +21,7 @@ The main goal of this project is to assist in the automated prediction of inflat
 
 ## Dataset
 
-We used a custom inflation dataset for training the model. This dataset is available for download from the following link: [Custom Inflastion Dataset](https://github.com/farisznafis/bangkit-financify/tree/main/ML). The Dataset contains samples of different inflation rate in Indonesia for each month or years allowing our model to effectively predict inflation rates.
+We used a custom inflation dataset for training the model. This dataset is available for download from the following link: [Custom Inflastion Dataset](https://github.com/farisznafis/bangkit-financify/tree/main/ML/Dataset). The Dataset contains samples of different inflation rate in Indonesia for each month or years allowing our model to effectively predict inflation rates.
 
 
 The Predicted inflation rate are categorized into:
