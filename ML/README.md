@@ -7,9 +7,9 @@
   - This version of the model is the local version. This model uses a local database (not including credential keys). This repository also includes the development models that we have built.
 
 ## ML team responsibilities : 
- - Collect and prepare a dataset.
- - Building a machine learning model which can predict inflation
- - Testing the Model
+  - Collect and prepare a dataset.
+  - Building a machine learning model which can predict inflation
+  - Testing the Model
 
 ## ML members :
   - (ML) M179BSY1349 – Ahmad Rizgifan Fauzhy
@@ -21,10 +21,10 @@
 ## Final Model
 Fixed files and models that can used to deploy
 
-mainml.py = main file to make the model
-mainml.ipynb = main file to make the model (jupyter notebook)
-app.py = main file to deploy the model using Flask
-all_cities_lstm_model_v3.h5 = main model to use for deploy
+  - mainml.py = main file to make the model
+  - mainml.ipynb = main file to make the model (jupyter notebook)
+  - app.py = main file to deploy the model using Flask
+  - all_cities_lstm_model_v3.h5 = main model to use for deploy
 
 ### Dataset
 Dataset used to make the model
