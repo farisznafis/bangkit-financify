@@ -2,9 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners
-        android:radius="12dp" /> <!-- Ubah nilai radius sesuai keinginan Anda -->
+        android:radius="12dp" />
     <solid
-        android:color="#F0F0F0" /> <!-- Warna latar belakang -->
-    <!-- Warna border -->
-    <!-- Lebar border -->
+        android:color="#F0F0F0" />
+
 </shape>
