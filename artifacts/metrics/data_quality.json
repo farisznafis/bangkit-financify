@@ -1,0 +1,938 @@
+{
+  "rows": 21078,
+  "cities": 150,
+  "date_range": [
+    "2008-01",
+    "2026-09"
+  ],
+  "placeholder_rows_set_to_missing": 1224,
+  "missing_inflation_rows": 1224,
+  "cities_below_min_history": [
+    "GUNUNGSITOLI",
+    "KAB ACEH TAMIANG",
+    "KAB ACEH TENGAH",
+    "KAB BADUNG",
+    "KAB BANDUNG",
+    "KAB BANGKA BARAT",
+    "KAB BELITUNG TIMUR",
+    "KAB BERAU",
+    "KAB BOJONEGORO",
+    "KAB DELI SERDANG",
+    "KAB DHARMASRAYA",
+    "KAB GORONTALO",
+    "KAB GRESIK",
+    "KAB GUNUNGKIDUL",
+    "KAB HALMAHERA TENGAH",
+    "KAB HULU SUNGAI TENGAH",
+    "KAB JAYAWIJAYA",
+    "KAB KAMPAR",
+    "KAB KAPUAS",
+    "KAB KARIMUN",
+    "KAB KARO",
+    "KAB KAYONG UTARA",
+    "KAB KERINCI",
+    "KAB KETAPANG",
+    "KAB KOLAKA",
+    "KAB KONAWE",
+    "KAB LABUHANBATU",
+    "KAB LAMPUNG TIMUR",
+    "KAB LEBAK",
+    "KAB LUWU TIMUR",
+    "KAB MAJALENGKA",
+    "KAB MAJENE",
+    "KAB MALUKU TENGAH",
+    "KAB MESUJI",
+    "KAB MINAHASA SELATAN",
+    "KAB MINAHASA UTARA",
+    "KAB MOROWALI",
+    "KAB MUARA ENIM",
+    "KAB MUKO MUKO",
+    "KAB NABIRE",
+    "KAB NGADA",
+    "KAB NUNUKAN",
+    "KAB OGAN KOMERING ILIR",
+    "KAB PANDEGLANG",
+    "KAB PASAMAN BARAT",
+    "KAB PENAJAM PASER UTARA",
+    "KAB REMBANG",
+    "KAB SIDENRENG RAPPANG",
+    "KAB SORONG",
+    "KAB SORONG SELATAN",
+    "KAB SUBANG",
+    "KAB SUKAMARA",
+    "KAB SUMBAWA",
+    "KAB TABANAN",
+    "KAB TANAH LAUT",
+    "KAB TIMOR TENGAH SELATAN",
+    "KAB TOLI TOLI",
+    "KAB TULUNGAGUNG",
+    "KAB WAJO",
+    "KAB WONOGIRI",
+    "KAB WONOSOBO",
+    "KOTABARU",
+    "KOTAMOBAGU",
+    "LUWUK",
+    "SINTANG",
+    "TANJUNG SELOR",
+    "TIMIKA",
+    "WAINGAPU"
+  ],
+  "outlier_rows": 170,
+  "outliers": [
+    {
+      "city": "AMBON",
+      "date": "2013-07",
+      "inflation_mtm": 4.03
+    },
+    {
+      "city": "AMBON",
+      "date": "2013-08",
+      "inflation_mtm": 4.79
+    },
+    {
+      "city": "AMBON",
+      "date": "2013-10",
+      "inflation_mtm": -3.82
+    },
+    {
+      "city": "BALIKPAPAN",
+      "date": "2013-07",
+      "inflation_mtm": 3.75
+    },
+    {
+      "city": "BANDA ACEH",
+      "date": "2008-05",
+      "inflation_mtm": 3.78
+    },
+    {
+      "city": "BANDAR LAMPUNG",
+      "date": "2008-06",
+      "inflation_mtm": 2.93
+    },
+    {
+      "city": "BANDUNG",
+      "date": "2008-06",
+      "inflation_mtm": 2.76
+    },
+    {
+      "city": "BANDUNG",
+      "date": "2013-07",
+      "inflation_mtm": 3.1
+    },
+    {
+      "city": "BANDUNG",
+      "date": "2014-12",
+      "inflation_mtm": 2.34
+    },
+    {
+      "city": "BANDUNG",
+      "date": "2022-12",
+      "inflation_mtm": 2.04
+    },
+    {
+      "city": "BANJARMASIN",
+      "date": "2008-01",
+      "inflation_mtm": 2.89
+    },
+    {
+      "city": "BANJARMASIN",
+      "date": "2012-01",
+      "inflation_mtm": 2.92
+    },
+    {
+      "city": "BANYUWANGI",
+      "date": "2014-12",
+      "inflation_mtm": 2.5
+    },
+    {
+      "city": "BATAM",
+      "date": "2014-12",
+      "inflation_mtm": 2.69
+    },
+    {
+      "city": "BEKASI",
+      "date": "2013-07",
+      "inflation_mtm": 4.06
+    },
+    {
+      "city": "BENGKULU",
+      "date": "2008-06",
+      "inflation_mtm": 4.14
+    },
+    {
+      "city": "BENGKULU",
+      "date": "2010-07",
+      "inflation_mtm": 3.03
+    },
+    {
+      "city": "BENGKULU",
+      "date": "2013-07",
+      "inflation_mtm": 3.4
+    },
+    {
+      "city": "BENGKULU",
+      "date": "2014-07",
+      "inflation_mtm": 2.92
+    },
+    {
+      "city": "BENGKULU",
+      "date": "2014-12",
+      "inflation_mtm": 3.03
+    },
+    {
+      "city": "BIMA",
+      "date": "2008-06",
+      "inflation_mtm": 4.94
+    },
+    {
+      "city": "BIMA",
+      "date": "2013-07",
+      "inflation_mtm": 3.83
+    },
+    {
+      "city": "BOGOR",
+      "date": "2008-01",
+      "inflation_mtm": 3.31
+    },
+    {
+      "city": "BOGOR",
+      "date": "2008-02",
+      "inflation_mtm": 2.02
+    },
+    {
+      "city": "BOGOR",
+      "date": "2008-05",
+      "inflation_mtm": 2.95
+    },
+    {
+      "city": "BOGOR",
+      "date": "2012-08",
+      "inflation_mtm": 2.07
+    },
+    {
+      "city": "BOGOR",
+      "date": "2013-07",
+      "inflation_mtm": 4.46
+    },
+    {
+      "city": "BULUKUMBA",
+      "date": "2014-12",
+      "inflation_mtm": 2.73
+    },
+    {
+      "city": "CILEGON",
+      "date": "2008-01",
+      "inflation_mtm": 2.3
+    },
+    {
+      "city": "CILEGON",
+      "date": "2008-05",
+      "inflation_mtm": 3.58
+    },
+    {
+      "city": "CILEGON",
+      "date": "2013-07",
+      "inflation_mtm": 2.96
+    },
+    {
+      "city": "CILEGON",
+      "date": "2014-12",
+      "inflation_mtm": 2.54
+    },
+    {
+      "city": "CIREBON",
+      "date": "2008-06",
+      "inflation_mtm": 3.33
+    },
+    {
+      "city": "CIREBON",
+      "date": "2013-07",
+      "inflation_mtm": 3.24
+    },
+    {
+      "city": "DENPASAR",
+      "date": "2008-01",
+      "inflation_mtm": 2.5
+    },
+    {
+      "city": "DENPASAR",
+      "date": "2013-07",
+      "inflation_mtm": 2.81
+    },
+    {
+      "city": "DEPOK",
+      "date": "2008-01",
+      "inflation_mtm": 2.56
+    },
+    {
+      "city": "DEPOK",
+      "date": "2008-06",
+      "inflation_mtm": 2.45
+    },
+    {
+      "city": "DEPOK",
+      "date": "2013-07",
+      "inflation_mtm": 4.58
+    },
+    {
+      "city": "DEPOK",
+      "date": "2014-12",
+      "inflation_mtm": 2.13
+    },
+    {
+      "city": "DKI JAKARTA",
+      "date": "2008-01",
+      "inflation_mtm": 2.37
+    },
+    {
+      "city": "DKI JAKARTA",
+      "date": "2008-06",
+      "inflation_mtm": 1.94
+    },
+    {
+      "city": "DKI JAKARTA",
+      "date": "2013-07",
+      "inflation_mtm": 3.16
+    },
+    {
+      "city": "DKI JAKARTA",
+      "date": "2014-12",
+      "inflation_mtm": 2.74
+    },
+    {
+      "city": "DKI JAKARTA",
+      "date": "2025-01",
+      "inflation_mtm": -1.5
+    },
+    {
+      "city": "DKI JAKARTA",
+      "date": "2025-03",
+      "inflation_mtm": 2.0
+    },
+    {
+      "city": "DUMAI",
+      "date": "2008-06",
+      "inflation_mtm": 3.8
+    },
+    {
+      "city": "GORONTALO",
+      "date": "2010-08",
+      "inflation_mtm": 3.75
+    },
+    {
+      "city": "GORONTALO",
+      "date": "2013-09",
+      "inflation_mtm": -3.43
+    },
+    {
+      "city": "GORONTALO",
+      "date": "2014-12",
+      "inflation_mtm": 4.12
+    },
+    {
+      "city": "GUNUNGSITOLI",
+      "date": "2025-12",
+      "inflation_mtm": 6.94
+    },
+    {
+      "city": "JAMBI",
+      "date": "2008-06",
+      "inflation_mtm": 4.19
+    },
+    {
+      "city": "JAYAPURA",
+      "date": "2008-06",
+      "inflation_mtm": 5.86
+    },
+    {
+      "city": "JEMBER",
+      "date": "2008-01",
+      "inflation_mtm": 2.13
+    },
+    {
+      "city": "JEMBER",
+      "date": "2008-06",
+      "inflation_mtm": 3.46
+    },
+    {
+      "city": "JEMBER",
+      "date": "2013-07",
+      "inflation_mtm": 3.09
+    },
+    {
+      "city": "JEMBER",
+      "date": "2014-12",
+      "inflation_mtm": 2.64
+    },
+    {
+      "city": "KAB ACEH TAMIANG",
+      "date": "2025-12",
+      "inflation_mtm": 4.74
+    },
+    {
+      "city": "KAB ACEH TENGAH",
+      "date": "2025-12",
+      "inflation_mtm": 4.95
+    },
+    {
+      "city": "KAB BANDUNG",
+      "date": "2025-03",
+      "inflation_mtm": 1.7
+    },
+    {
+      "city": "KAB GUNUNGKIDUL",
+      "date": "2025-04",
+      "inflation_mtm": 1.79
+    },
+    {
+      "city": "KAB NUNUKAN",
+      "date": "2025-03",
+      "inflation_mtm": 2.75
+    },
+    {
+      "city": "KAB OGAN KOMERING ILIR",
+      "date": "2025-03",
+      "inflation_mtm": 1.68
+    },
+    {
+      "city": "KAB SIDENRENG RAPPANG",
+      "date": "2025-03",
+      "inflation_mtm": 2.07
+    },
+    {
+      "city": "KAB WAJO",
+      "date": "2025-03",
+      "inflation_mtm": 2.15
+    },
+    {
+      "city": "KEDIRI",
+      "date": "2008-06",
+      "inflation_mtm": 2.04
+    },
+    {
+      "city": "KEDIRI",
+      "date": "2013-07",
+      "inflation_mtm": 3.26
+    },
+    {
+      "city": "KEDIRI",
+      "date": "2014-12",
+      "inflation_mtm": 2.52
+    },
+    {
+      "city": "KENDARI",
+      "date": "2008-06",
+      "inflation_mtm": 6.49
+    },
+    {
+      "city": "KENDARI",
+      "date": "2013-07",
+      "inflation_mtm": 4.85
+    },
+    {
+      "city": "KENDARI",
+      "date": "2014-12",
+      "inflation_mtm": 3.27
+    },
+    {
+      "city": "KENDARI",
+      "date": "2017-06",
+      "inflation_mtm": 3.58
+    },
+    {
+      "city": "KOTABARU",
+      "date": "2025-01",
+      "inflation_mtm": -1.75
+    },
+    {
+      "city": "KOTABARU",
+      "date": "2025-03",
+      "inflation_mtm": 3.16
+    },
+    {
+      "city": "KUDUS",
+      "date": "2014-12",
+      "inflation_mtm": 2.47
+    },
+    {
+      "city": "KUPANG",
+      "date": "2013-07",
+      "inflation_mtm": 4.98
+    },
+    {
+      "city": "LHOKSEUMAWE",
+      "date": "2008-06",
+      "inflation_mtm": 4.38
+    },
+    {
+      "city": "LUBUKLINGGAU",
+      "date": "2014-11",
+      "inflation_mtm": 2.07
+    },
+    {
+      "city": "LUBUKLINGGAU",
+      "date": "2014-12",
+      "inflation_mtm": 3.03
+    },
+    {
+      "city": "MADIUN",
+      "date": "2008-01",
+      "inflation_mtm": 2.32
+    },
+    {
+      "city": "MADIUN",
+      "date": "2008-06",
+      "inflation_mtm": 4.05
+    },
+    {
+      "city": "MADIUN",
+      "date": "2013-07",
+      "inflation_mtm": 3.6
+    },
+    {
+      "city": "MADIUN",
+      "date": "2014-12",
+      "inflation_mtm": 2.2
+    },
+    {
+      "city": "MAKASSAR",
+      "date": "2008-06",
+      "inflation_mtm": 3.39
+    },
+    {
+      "city": "MAKASSAR",
+      "date": "2013-07",
+      "inflation_mtm": 3.03
+    },
+    {
+      "city": "MALANG",
+      "date": "2008-01",
+      "inflation_mtm": 2.17
+    },
+    {
+      "city": "MALANG",
+      "date": "2008-06",
+      "inflation_mtm": 2.77
+    },
+    {
+      "city": "MALANG",
+      "date": "2013-07",
+      "inflation_mtm": 3.49
+    },
+    {
+      "city": "MALANG",
+      "date": "2014-12",
+      "inflation_mtm": 2.72
+    },
+    {
+      "city": "MAMUJU",
+      "date": "2008-06",
+      "inflation_mtm": 3.04
+    },
+    {
+      "city": "MAMUJU",
+      "date": "2008-08",
+      "inflation_mtm": 3.21
+    },
+    {
+      "city": "MANOKWARI",
+      "date": "2008-06",
+      "inflation_mtm": 5.78
+    },
+    {
+      "city": "MATARAM",
+      "date": "2008-06",
+      "inflation_mtm": 3.21
+    },
+    {
+      "city": "MATARAM",
+      "date": "2013-07",
+      "inflation_mtm": 4.55
+    },
+    {
+      "city": "MAUMERE",
+      "date": "2008-05",
+      "inflation_mtm": 3.93
+    },
+    {
+      "city": "METRO",
+      "date": "2014-01",
+      "inflation_mtm": 2.79
+    },
+    {
+      "city": "METRO",
+      "date": "2014-12",
+      "inflation_mtm": 2.59
+    },
+    {
+      "city": "PADANG",
+      "date": "2008-06",
+      "inflation_mtm": 4.09
+    },
+    {
+      "city": "PADANG",
+      "date": "2011-01",
+      "inflation_mtm": 3.7
+    },
+    {
+      "city": "PADANG",
+      "date": "2011-03",
+      "inflation_mtm": -2.59
+    },
+    {
+      "city": "PADANG",
+      "date": "2014-11",
+      "inflation_mtm": 3.44
+    },
+    {
+      "city": "PADANGSIDIMPUAN",
+      "date": "2013-07",
+      "inflation_mtm": 3.7
+    },
+    {
+      "city": "PALANGKA RAYA",
+      "date": "2008-01",
+      "inflation_mtm": 5.02
+    },
+    {
+      "city": "PALEMBANG",
+      "date": "2008-06",
+      "inflation_mtm": 3.41
+    },
+    {
+      "city": "PALEMBANG",
+      "date": "2013-07",
+      "inflation_mtm": 2.92
+    },
+    {
+      "city": "PALEMBANG",
+      "date": "2014-12",
+      "inflation_mtm": 2.75
+    },
+    {
+      "city": "PALOPO",
+      "date": "2008-01",
+      "inflation_mtm": 2.94
+    },
+    {
+      "city": "PALOPO",
+      "date": "2008-06",
+      "inflation_mtm": 3.15
+    },
+    {
+      "city": "PALOPO",
+      "date": "2013-07",
+      "inflation_mtm": 2.98
+    },
+    {
+      "city": "PALU",
+      "date": "2013-07",
+      "inflation_mtm": 4.59
+    },
+    {
+      "city": "PARE-PARE",
+      "date": "2013-07",
+      "inflation_mtm": 3.88
+    },
+    {
+      "city": "PARE-PARE",
+      "date": "2014-12",
+      "inflation_mtm": 3.75
+    },
+    {
+      "city": "PONTIANAK",
+      "date": "2013-07",
+      "inflation_mtm": 3.36
+    },
+    {
+      "city": "PROBOLINGGO",
+      "date": "2008-07",
+      "inflation_mtm": 3.08
+    },
+    {
+      "city": "PROBOLINGGO",
+      "date": "2010-07",
+      "inflation_mtm": 2.94
+    },
+    {
+      "city": "PROBOLINGGO",
+      "date": "2012-08",
+      "inflation_mtm": 2.01
+    },
+    {
+      "city": "PROBOLINGGO",
+      "date": "2013-07",
+      "inflation_mtm": 3.13
+    },
+    {
+      "city": "PROBOLINGGO",
+      "date": "2014-12",
+      "inflation_mtm": 2.15
+    },
+    {
+      "city": "PURWOKERTO",
+      "date": "2008-06",
+      "inflation_mtm": 2.75
+    },
+    {
+      "city": "PURWOKERTO",
+      "date": "2008-07",
+      "inflation_mtm": 2.58
+    },
+    {
+      "city": "PURWOKERTO",
+      "date": "2013-07",
+      "inflation_mtm": 2.84
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2008-01",
+      "inflation_mtm": 2.51
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2008-06",
+      "inflation_mtm": 3.32
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2012-08",
+      "inflation_mtm": 2.29
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2013-07",
+      "inflation_mtm": 4.1
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2013-08",
+      "inflation_mtm": 2.22
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2014-12",
+      "inflation_mtm": 2.52
+    },
+    {
+      "city": "SAMARINDA",
+      "date": "2025-03",
+      "inflation_mtm": 2.19
+    },
+    {
+      "city": "SAMPIT",
+      "date": "2008-01",
+      "inflation_mtm": 3.96
+    },
+    {
+      "city": "SAMPIT",
+      "date": "2008-06",
+      "inflation_mtm": 2.87
+    },
+    {
+      "city": "SAMPIT",
+      "date": "2013-01",
+      "inflation_mtm": 2.91
+    },
+    {
+      "city": "SEMARANG",
+      "date": "2008-06",
+      "inflation_mtm": 2.4
+    },
+    {
+      "city": "SEMARANG",
+      "date": "2013-07",
+      "inflation_mtm": 3.5
+    },
+    {
+      "city": "SEMARANG",
+      "date": "2014-12",
+      "inflation_mtm": 2.4
+    },
+    {
+      "city": "SERANG",
+      "date": "2013-07",
+      "inflation_mtm": 3.56
+    },
+    {
+      "city": "SERANG",
+      "date": "2014-12",
+      "inflation_mtm": 3.07
+    },
+    {
+      "city": "SINGKAWANG",
+      "date": "2008-06",
+      "inflation_mtm": 2.94
+    },
+    {
+      "city": "SINTANG",
+      "date": "2025-01",
+      "inflation_mtm": -1.85
+    },
+    {
+      "city": "SINTANG",
+      "date": "2025-03",
+      "inflation_mtm": 2.13
+    },
+    {
+      "city": "SORONG",
+      "date": "2008-05",
+      "inflation_mtm": 7.18
+    },
+    {
+      "city": "SORONG",
+      "date": "2008-06",
+      "inflation_mtm": 5.72
+    },
+    {
+      "city": "SORONG",
+      "date": "2013-07",
+      "inflation_mtm": 5.09
+    },
+    {
+      "city": "SORONG",
+      "date": "2013-08",
+      "inflation_mtm": 6.47
+    },
+    {
+      "city": "SORONG",
+      "date": "2013-09",
+      "inflation_mtm": -4.28
+    },
+    {
+      "city": "SUKABUMI",
+      "date": "2008-06",
+      "inflation_mtm": 2.8
+    },
+    {
+      "city": "SUKABUMI",
+      "date": "2010-08",
+      "inflation_mtm": 1.95
+    },
+    {
+      "city": "SUKABUMI",
+      "date": "2013-07",
+      "inflation_mtm": 3.11
+    },
+    {
+      "city": "SUKABUMI",
+      "date": "2014-12",
+      "inflation_mtm": 2.43
+    },
+    {
+      "city": "SUMENEP",
+      "date": "2013-07",
+      "inflation_mtm": 3.84
+    },
+    {
+      "city": "SURABAYA",
+      "date": "2008-06",
+      "inflation_mtm": 2.0
+    },
+    {
+      "city": "SURABAYA",
+      "date": "2010-07",
+      "inflation_mtm": 1.99
+    },
+    {
+      "city": "SURABAYA",
+      "date": "2013-07",
+      "inflation_mtm": 2.67
+    },
+    {
+      "city": "SURABAYA",
+      "date": "2014-12",
+      "inflation_mtm": 2.23
+    },
+    {
+      "city": "SURAKARTA",
+      "date": "2008-06",
+      "inflation_mtm": 2.13
+    },
+    {
+      "city": "SURAKARTA",
+      "date": "2013-07",
+      "inflation_mtm": 3.91
+    },
+    {
+      "city": "SURAKARTA",
+      "date": "2014-12",
+      "inflation_mtm": 2.28
+    },
+    {
+      "city": "TANGERANG",
+      "date": "2008-06",
+      "inflation_mtm": 3.04
+    },
+    {
+      "city": "TANGERANG",
+      "date": "2013-07",
+      "inflation_mtm": 4.45
+    },
+    {
+      "city": "TANGERANG",
+      "date": "2014-12",
+      "inflation_mtm": 2.39
+    },
+    {
+      "city": "TANJUNG PINANG",
+      "date": "2013-07",
+      "inflation_mtm": 3.68
+    },
+    {
+      "city": "TARAKAN",
+      "date": "2008-01",
+      "inflation_mtm": 6.19
+    },
+    {
+      "city": "TASIKMALAYA",
+      "date": "2008-06",
+      "inflation_mtm": 2.54
+    },
+    {
+      "city": "TASIKMALAYA",
+      "date": "2013-07",
+      "inflation_mtm": 2.84
+    },
+    {
+      "city": "TASIKMALAYA",
+      "date": "2014-12",
+      "inflation_mtm": 2.44
+    },
+    {
+      "city": "TEGAL",
+      "date": "2013-07",
+      "inflation_mtm": 2.38
+    },
+    {
+      "city": "TERNATE",
+      "date": "2013-07",
+      "inflation_mtm": 6.04
+    },
+    {
+      "city": "WATAMPONE",
+      "date": "2008-02",
+      "inflation_mtm": 2.93
+    },
+    {
+      "city": "WATAMPONE",
+      "date": "2008-06",
+      "inflation_mtm": 6.26
+    },
+    {
+      "city": "YOGYAKARTA",
+      "date": "2008-06",
+      "inflation_mtm": 2.51
+    },
+    {
+      "city": "YOGYAKARTA",
+      "date": "2013-07",
+      "inflation_mtm": 2.58
+    }
+  ],
+  "legacy_vs_bps_overlap": {
+    "rows": 6806,
+    "share_equal": 0.9999,
+    "max_abs_diff": 0.04
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "split": {
+    "train_end": "2023-12",
+    "val_end": "2024-12",
+    "test_end": "2026-09",
+    "rows": {
+      "train": 13464,
+      "val": 984,
+      "test": 1722
+    }
+  },
+  "validation": {
+    "naive": {
+      "mae": 0.3797,
+      "rmse": 0.5408,
+      "n": 984
+    },
+    "seasonal_naive": {
+      "mae": 0.3719,
+      "rmse": 0.5102,
+      "n": 984
+    },
+    "ridge": {
+      "mae": 0.3191,
+      "rmse": 0.419,
+      "n": 984
+    },
+    "hist_gbr": {
+      "mae": 0.3178,
+      "rmse": 0.4298,
+      "n": 984
+    }
+  },
+  "ablation": [
+    {
+      "model": "ridge",
+      "groups": [
+        "lags"
+      ],
+      "mae": 0.3518,
+      "rmse": 0.4475,
+      "n": 984,
+      "kept": true
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling"
+      ],
+      "mae": 0.3511,
+      "rmse": 0.4469,
+      "n": 984,
+      "kept": true
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality"
+      ],
+      "mae": 0.3501,
+      "rmse": 0.4471,
+      "n": 984,
+      "kept": true
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality",
+        "islamic_calendar"
+      ],
+      "mae": 0.3191,
+      "rmse": 0.419,
+      "n": 984,
+      "kept": true
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags"
+      ],
+      "mae": 0.3318,
+      "rmse": 0.4372,
+      "n": 984,
+      "kept": true
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "rolling"
+      ],
+      "mae": 0.3316,
+      "rmse": 0.4365,
+      "n": 984,
+      "kept": true
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality"
+      ],
+      "mae": 0.3379,
+      "rmse": 0.4525,
+      "n": 984,
+      "kept": false
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "rolling",
+        "islamic_calendar"
+      ],
+      "mae": 0.3178,
+      "rmse": 0.4298,
+      "n": 984,
+      "kept": true
+    }
+  ],
+  "selected_groups": {
+    "ridge": [
+      "lags",
+      "rolling",
+      "seasonality",
+      "islamic_calendar"
+    ],
+    "hist_gbr": [
+      "lags",
+      "rolling",
+      "islamic_calendar"
+    ]
+  },
+  "selected_model": "hist_gbr",
+  "test": {
+    "naive": {
+      "mae": 0.6942,
+      "rmse": 0.9532,
+      "n": 1722
+    },
+    "seasonal_naive": {
+      "mae": 0.6851,
+      "rmse": 0.8917,
+      "n": 1722
+    },
+    "ridge": {
+      "mae": 0.4664,
+      "rmse": 0.623,
+      "n": 1722
+    },
+    "hist_gbr": {
+      "mae": 0.4948,
+      "rmse": 0.6637,
+      "n": 1722
+    }
+  }
+}

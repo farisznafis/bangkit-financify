@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financify</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 16px; color: #1d2433; background: #fff; }
+  section { border: 1px solid #d9dee8; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  label { display: block; margin: .6rem 0 .2rem; font-weight: 600; }
+  input, select, button { font: inherit; padding: .45rem .6rem; width: 100%; box-sizing: border-box; }
+  button { margin-top: 1rem; background: #1f5eff; color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
+  .big { font-size: 2.4rem; font-weight: 700; margin: .2rem 0; }
+  .muted { color: #5b6475; font-size: .9rem; }
+  .err { color: #b00020; }
+  dl { display: grid; grid-template-columns: 1fr auto; gap: .3rem 1rem; }
+  dd { margin: 0; font-weight: 600; text-align: right; }
+  svg { width: 100%; height: 160px; }
+</style>
+</head>
+<body>
+<h1>Financify</h1>
+
+<section>
+  <h2>Inflation forecast</h2>
+  <form id="f-forecast">
+    <label for="city">City</label>
+    <select id="city" name="city">{% for c in cities %}<option{% if c == "YOGYAKARTA" %} selected{% endif %}>{{ c }}</option>{% endfor %}</select>
+    <button>Forecast</button>
+  </form>
+  <div id="forecast" aria-live="polite"></div>
+</section>
+
+<section id="planner" hidden>
+  <h2>How could inflation affect your goal?</h2>
+  <form id="f-plan">
+    <label for="current_savings">Current savings (Rp)</label><input id="current_savings" type="number" min="0" required value="15000000">
+    <label for="monthly_income">Monthly income (Rp)</label><input id="monthly_income" type="number" min="0" required value="10000000">
+    <label for="monthly_expenses">Monthly expenses (Rp)</label><input id="monthly_expenses" type="number" min="0" required value="6000000">
+    <label for="goal_amount">Goal amount today (Rp)</label><input id="goal_amount" type="number" min="1" required value="100000000">
+    <button>Estimate</button>
+  </form>
+  <div id="plan" aria-live="polite"></div>
+</section>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const rp = (n) => "Rp" + Math.round(n).toLocaleString("id-ID");
+const post = (url, body) => fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)})
+  .then(async r => { const j = await r.json(); if (!r.ok) throw new Error(j.error.message); return j; });
+
+function chart(history, f) {
+  const pts = history.filter(h => h.inflation !== null).map(h => h.inflation).concat([f.predicted_inflation]);
+  const lo = Math.min(...pts, 0), hi = Math.max(...pts), W = 600, H = 160, n = pts.length;
+  const x = i => 10 + i * (W - 20) / (n - 1), y = v => H - 10 - (v - lo) * (H - 20) / ((hi - lo) || 1);
+  const line = pts.slice(0, -1).map((v, i) => `${x(i)},${y(v)}`).join(" ");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Last 24 months of inflation and next-month forecast">
+    <line x1="0" x2="${W}" y1="${y(0)}" y2="${y(0)}" stroke="#d9dee8"/>
+    <polyline points="${line}" fill="none" stroke="#1d2433" stroke-width="2"/>
+    <line x1="${x(n - 2)}" y1="${y(pts[n - 2])}" x2="${x(n - 1)}" y2="${y(pts[n - 1])}" stroke="#1f5eff" stroke-width="2" stroke-dasharray="4"/>
+    <circle cx="${x(n - 1)}" cy="${y(pts[n - 1])}" r="4" fill="#1f5eff"/></svg>
+    <p class="muted">Black: actual month-to-month inflation (last 24 months). Blue: forecast.</p>`;
+}
+
+$("f-forecast").onsubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const f = await post("/api/forecast", {city: $("city").value});
+    const arrow = f.trend === "up" ? "↑" : f.trend === "down" ? "↓" : "→";
+    $("forecast").innerHTML = `<p class="muted">Forecast for ${f.forecast_period} (data through ${f.as_of})</p>
+      <p class="big">${f.predicted_inflation.toFixed(2)}%</p>
+      <p>${arrow} ${Math.abs(f.change).toFixed(2)} percentage points vs previous month (${f.previous_inflation.toFixed(2)}%)</p>
+      ${chart(f.history, f)}
+      <p class="muted">Short-term model estimate (typical test error ≈ ±0.4 pp). Not a certainty.</p>`;
+    $("planner").hidden = false;
+  } catch (err) { $("forecast").innerHTML = `<p class="err">${err.message}</p>`; }
+};
+
+$("f-plan").onsubmit = async (e) => {
+  e.preventDefault();
+  const body = {city: $("city").value};
+  for (const k of ["current_savings", "monthly_income", "monthly_expenses", "goal_amount"]) body[k] = Number($(k).value);
+  try {
+    const p = await post("/api/financial-impact", body);
+    const t = p.time_to_goal;
+    $("plan").innerHTML = `<dl>
+      <dt>Goal today</dt><dd>${rp(p.goal_today)}</dd>
+      <dt>Inflation-adjusted goal</dt><dd>${rp(p.inflation_adjusted_goal)}</dd>
+      <dt>Monthly saving capacity</dt><dd>${rp(p.monthly_saving_capacity)}</dd>
+      <dt>Estimated time to goal</dt><dd>${t.years} yr ${t.months} mo</dd></dl>
+      <p class="muted">Assumes ${p.annual_inflation_assumption_pct}%/year inflation (${p.assumption_source}). ${p.note}</p>`;
+  } catch (err) { $("plan").innerHTML = `<p class="err">${err.message}</p>`; }
+};
+</script>
+</body>
+</html>

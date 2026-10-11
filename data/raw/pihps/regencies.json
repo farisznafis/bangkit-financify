@@ -1,0 +1,662 @@
+[
+ {
+  "regency_id": 1,
+  "regency": "Kota Banda Aceh",
+  "province_id": 1,
+  "province": "Aceh"
+ },
+ {
+  "regency_id": 2,
+  "regency": "Kota Lhokseumawe",
+  "province_id": 1,
+  "province": "Aceh"
+ },
+ {
+  "regency_id": 3,
+  "regency": "Kota Meulaboh",
+  "province_id": 1,
+  "province": "Aceh"
+ },
+ {
+  "regency_id": 319,
+  "regency": "Kab. Badung",
+  "province_id": 17,
+  "province": "Bali"
+ },
+ {
+  "regency_id": 50,
+  "regency": "Kota Denpasar",
+  "province_id": 17,
+  "province": "Bali"
+ },
+ {
+  "regency_id": 51,
+  "regency": "Kota Singaraja",
+  "province_id": 17,
+  "province": "Bali"
+ },
+ {
+  "regency_id": 315,
+  "regency": "Kab. Tabanan",
+  "province_id": 17,
+  "province": "Bali"
+ },
+ {
+  "regency_id": 25,
+  "regency": "Kota Cilegon",
+  "province_id": 11,
+  "province": "Banten"
+ },
+ {
+  "regency_id": 24,
+  "regency": "Kota Serang",
+  "province_id": 11,
+  "province": "Banten"
+ },
+ {
+  "regency_id": 26,
+  "regency": "Kota Tangerang",
+  "province_id": 11,
+  "province": "Banten"
+ },
+ {
+  "regency_id": 17,
+  "regency": "Kota Bengkulu",
+  "province_id": 7,
+  "province": "Bengkulu"
+ },
+ {
+  "regency_id": 41,
+  "regency": "Kota Yogyakarta",
+  "province_id": 15,
+  "province": "DI Yogyakarta"
+ },
+ {
+  "regency_id": 34,
+  "regency": "Kota Jakarta Pusat",
+  "province_id": 13,
+  "province": "DKI Jakarta"
+ },
+ {
+  "regency_id": 66,
+  "regency": "Kota Gorontalo",
+  "province_id": 25,
+  "province": "Gorontalo"
+ },
+ {
+  "regency_id": 245,
+  "regency": "Kab. Gorontalo",
+  "province_id": 25,
+  "province": "Gorontalo"
+ },
+ {
+  "regency_id": 16,
+  "regency": "Kab. Bungo",
+  "province_id": 6,
+  "province": "Jambi"
+ },
+ {
+  "regency_id": 15,
+  "regency": "Kota Jambi",
+  "province_id": 6,
+  "province": "Jambi"
+ },
+ {
+  "regency_id": 27,
+  "regency": "Kota Bandung",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 30,
+  "regency": "Kota Bekasi",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 31,
+  "regency": "Kota Bogor",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 28,
+  "regency": "Kota Cirebon",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 103,
+  "regency": "Kab. Cirebon",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 32,
+  "regency": "Kota Depok",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 33,
+  "regency": "Kota Sukabumi",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 106,
+  "regency": "Kab. Tasikmalaya",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 29,
+  "regency": "Kota Tasikmalaya",
+  "province_id": 12,
+  "province": "Jawa Barat"
+ },
+ {
+  "regency_id": 38,
+  "regency": "Kab. Banyumas",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 166,
+  "regency": "Kab. Boyolali",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 39,
+  "regency": "Kab. Cilacap",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 158,
+  "regency": "Kab. Karanganyar",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 159,
+  "regency": "Kab. Klaten",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 40,
+  "regency": "Kab. Kudus",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 35,
+  "regency": "Kota Semarang",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 151,
+  "regency": "Kab. Sragen",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 144,
+  "regency": "Kab. Sukoharjo",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 36,
+  "regency": "Kota Surakarta (Solo)",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 37,
+  "regency": "Kota Tegal",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 165,
+  "regency": "Kab. Wonogiri",
+  "province_id": 14,
+  "province": "Jawa Tengah"
+ },
+ {
+  "regency_id": 46,
+  "regency": "Kab. Banyuwangi",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 135,
+  "regency": "Kota Blitar",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 45,
+  "regency": "Kab. Jember",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 44,
+  "regency": "Kota Kediri",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 47,
+  "regency": "Kota Madiun",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 43,
+  "regency": "Kota Malang",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 48,
+  "regency": "Kota Probolinggo",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 49,
+  "regency": "Kab. Sumenep",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 42,
+  "regency": "Kota Surabaya",
+  "province_id": 16,
+  "province": "Jawa Timur"
+ },
+ {
+  "regency_id": 784,
+  "regency": "Kab. Sintang",
+  "province_id": 20,
+  "province": "Kalimantan Barat"
+ },
+ {
+  "regency_id": 57,
+  "regency": "Kota Pontianak",
+  "province_id": 20,
+  "province": "Kalimantan Barat"
+ },
+ {
+  "regency_id": 58,
+  "regency": "Kota Singkawang",
+  "province_id": 20,
+  "province": "Kalimantan Barat"
+ },
+ {
+  "regency_id": 59,
+  "regency": "Kota Banjarmasin",
+  "province_id": 21,
+  "province": "Kalimantan Selatan"
+ },
+ {
+  "regency_id": 782,
+  "regency": "Kab. Kotabaru",
+  "province_id": 21,
+  "province": "Kalimantan Selatan"
+ },
+ {
+  "regency_id": 60,
+  "regency": "Kota Tanjung",
+  "province_id": 21,
+  "province": "Kalimantan Selatan"
+ },
+ {
+  "regency_id": 61,
+  "regency": "Kota Palangkaraya",
+  "province_id": 22,
+  "province": "Kalimantan Tengah"
+ },
+ {
+  "regency_id": 62,
+  "regency": "Kota Sampit",
+  "province_id": 22,
+  "province": "Kalimantan Tengah"
+ },
+ {
+  "regency_id": 64,
+  "regency": "Kota Balikpapan",
+  "province_id": 23,
+  "province": "Kalimantan Timur"
+ },
+ {
+  "regency_id": 346,
+  "regency": "Kota Bontang",
+  "province_id": 23,
+  "province": "Kalimantan Timur"
+ },
+ {
+  "regency_id": 63,
+  "regency": "Kota Samarinda",
+  "province_id": 23,
+  "province": "Kalimantan Timur"
+ },
+ {
+  "regency_id": 340,
+  "regency": "Kab. Bulungan",
+  "province_id": 24,
+  "province": "Kalimantan Utara"
+ },
+ {
+  "regency_id": 348,
+  "regency": "Kab. Nunukan",
+  "province_id": 24,
+  "province": "Kalimantan Utara"
+ },
+ {
+  "regency_id": 65,
+  "regency": "Kota Tarakan",
+  "province_id": 24,
+  "province": "Kalimantan Utara"
+ },
+ {
+  "regency_id": 20,
+  "regency": "Kota Pangkal Pinang",
+  "province_id": 9,
+  "province": "Kepulauan Bangka Belitung"
+ },
+ {
+  "regency_id": 21,
+  "regency": "Kota Tanjung Pandan",
+  "province_id": 9,
+  "province": "Kepulauan Bangka Belitung"
+ },
+ {
+  "regency_id": 13,
+  "regency": "Kota Batam",
+  "province_id": 5,
+  "province": "Kepulauan Riau"
+ },
+ {
+  "regency_id": 14,
+  "regency": "Kota Tanjung Pinang",
+  "province_id": 5,
+  "province": "Kepulauan Riau"
+ },
+ {
+  "regency_id": 22,
+  "regency": "Kota Bandar Lampung",
+  "province_id": 10,
+  "province": "Lampung"
+ },
+ {
+  "regency_id": 23,
+  "regency": "Kota Metro",
+  "province_id": 10,
+  "province": "Lampung"
+ },
+ {
+  "regency_id": 77,
+  "regency": "Kota Ambon",
+  "province_id": 31,
+  "province": "Maluku"
+ },
+ {
+  "regency_id": 78,
+  "regency": "Kota Tual",
+  "province_id": 31,
+  "province": "Maluku"
+ },
+ {
+  "regency_id": 79,
+  "regency": "Kota Ternate",
+  "province_id": 32,
+  "province": "Maluku Utara"
+ },
+ {
+  "regency_id": 54,
+  "regency": "Kota Bima",
+  "province_id": 18,
+  "province": "Nusa Tenggara Barat"
+ },
+ {
+  "regency_id": 496,
+  "regency": "Kab. Lombok Timur",
+  "province_id": 18,
+  "province": "Nusa Tenggara Barat"
+ },
+ {
+  "regency_id": 52,
+  "regency": "Kota Mataram",
+  "province_id": 18,
+  "province": "Nusa Tenggara Barat"
+ },
+ {
+  "regency_id": 497,
+  "regency": "Kab. Sumbawa",
+  "province_id": 18,
+  "province": "Nusa Tenggara Barat"
+ },
+ {
+  "regency_id": 55,
+  "regency": "Kota Kupang",
+  "province_id": 19,
+  "province": "Nusa Tenggara Timur"
+ },
+ {
+  "regency_id": 56,
+  "regency": "Kota Maumere",
+  "province_id": 19,
+  "province": "Nusa Tenggara Timur"
+ },
+ {
+  "regency_id": 304,
+  "regency": "Kab. Sumba Timur",
+  "province_id": 19,
+  "province": "Nusa Tenggara Timur"
+ },
+ {
+  "regency_id": 80,
+  "regency": "Kota Jayapura",
+  "province_id": 33,
+  "province": "Papua"
+ },
+ {
+  "regency_id": 219,
+  "regency": "Kab. Jayawijaya",
+  "province_id": 33,
+  "province": "Papua"
+ },
+ {
+  "regency_id": 81,
+  "regency": "Kab. Merauke",
+  "province_id": 33,
+  "province": "Papua"
+ },
+ {
+  "regency_id": 200,
+  "regency": "Kab. Mimika",
+  "province_id": 33,
+  "province": "Papua"
+ },
+ {
+  "regency_id": 205,
+  "regency": "Kab. Nabire",
+  "province_id": 33,
+  "province": "Papua"
+ },
+ {
+  "regency_id": 82,
+  "regency": "Kab. Manokwari",
+  "province_id": 34,
+  "province": "Papua Barat"
+ },
+ {
+  "regency_id": 83,
+  "regency": "Kota Sorong",
+  "province_id": 34,
+  "province": "Papua Barat"
+ },
+ {
+  "regency_id": 11,
+  "regency": "Kota Dumai",
+  "province_id": 4,
+  "province": "Riau"
+ },
+ {
+  "regency_id": 10,
+  "regency": "Kota Pekanbaru",
+  "province_id": 4,
+  "province": "Riau"
+ },
+ {
+  "regency_id": 12,
+  "regency": "Kota Tembilahan",
+  "province_id": 4,
+  "province": "Riau"
+ },
+ {
+  "regency_id": 499,
+  "regency": "Kab. Majene",
+  "province_id": 30,
+  "province": "Sulawesi Barat"
+ },
+ {
+  "regency_id": 76,
+  "regency": "Kota Mamuju",
+  "province_id": 30,
+  "province": "Sulawesi Barat"
+ },
+ {
+  "regency_id": 498,
+  "regency": "Kab. Polewali Mandar",
+  "province_id": 30,
+  "province": "Sulawesi Barat"
+ },
+ {
+  "regency_id": 68,
+  "regency": "Kab. Bulukumba",
+  "province_id": 26,
+  "province": "Sulawesi Selatan"
+ },
+ {
+  "regency_id": 67,
+  "regency": "Kota Makassar",
+  "province_id": 26,
+  "province": "Sulawesi Selatan"
+ },
+ {
+  "regency_id": 69,
+  "regency": "Kota Palopo",
+  "province_id": 26,
+  "province": "Sulawesi Selatan"
+ },
+ {
+  "regency_id": 70,
+  "regency": "Kota Parepare",
+  "province_id": 26,
+  "province": "Sulawesi Selatan"
+ },
+ {
+  "regency_id": 71,
+  "regency": "Kota Watampone",
+  "province_id": 26,
+  "province": "Sulawesi Selatan"
+ },
+ {
+  "regency_id": 285,
+  "regency": "Kab. Banggai",
+  "province_id": 28,
+  "province": "Sulawesi Tengah"
+ },
+ {
+  "regency_id": 74,
+  "regency": "Kota Palu",
+  "province_id": 28,
+  "province": "Sulawesi Tengah"
+ },
+ {
+  "regency_id": 73,
+  "regency": "Kota Bau-Bau",
+  "province_id": 27,
+  "province": "Sulawesi Tenggara"
+ },
+ {
+  "regency_id": 72,
+  "regency": "Kota Kendari",
+  "province_id": 27,
+  "province": "Sulawesi Tenggara"
+ },
+ {
+  "regency_id": 249,
+  "regency": "Kota Kotamobagu",
+  "province_id": 29,
+  "province": "Sulawesi Utara"
+ },
+ {
+  "regency_id": 75,
+  "regency": "Kota Manado",
+  "province_id": 29,
+  "province": "Sulawesi Utara"
+ },
+ {
+  "regency_id": 9,
+  "regency": "Kota Bukittinggi",
+  "province_id": 3,
+  "province": "Sumatera Barat"
+ },
+ {
+  "regency_id": 8,
+  "regency": "Kota Padang",
+  "province_id": 3,
+  "province": "Sumatera Barat"
+ },
+ {
+  "regency_id": 19,
+  "regency": "Kota Lubuk Linggau",
+  "province_id": 8,
+  "province": "Sumatera Selatan"
+ },
+ {
+  "regency_id": 18,
+  "regency": "Kota Palembang",
+  "province_id": 8,
+  "province": "Sumatera Selatan"
+ },
+ {
+  "regency_id": 455,
+  "regency": "Kota Gunung Sitoli",
+  "province_id": 2,
+  "province": "Sumatera Utara"
+ },
+ {
+  "regency_id": 4,
+  "regency": "Kota Medan",
+  "province_id": 2,
+  "province": "Sumatera Utara"
+ },
+ {
+  "regency_id": 7,
+  "regency": "Kota Padang Sidempuan",
+  "province_id": 2,
+  "province": "Sumatera Utara"
+ },
+ {
+  "regency_id": 6,
+  "regency": "Kota Pematang Siantar",
+  "province_id": 2,
+  "province": "Sumatera Utara"
+ },
+ {
+  "regency_id": 5,
+  "regency": "Kota Sibolga",
+  "province_id": 2,
+  "province": "Sumatera Utara"
+ }
+]
