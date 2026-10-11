@@ -4,93 +4,210 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Financify</title>
+<meta name="description" content="Next-month city inflation forecasts for Indonesia, and what inflation means for your savings goal.">
 <style>
-  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 16px; color: #1d2433; background: #fff; }
-  section { border: 1px solid #d9dee8; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
-  label { display: block; margin: .6rem 0 .2rem; font-weight: 600; }
-  input, select, button { font: inherit; padding: .45rem .6rem; width: 100%; box-sizing: border-box; }
-  button { margin-top: 1rem; background: #1f5eff; color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
-  .big { font-size: 2.4rem; font-weight: 700; margin: .2rem 0; }
-  .muted { color: #5b6475; font-size: .9rem; }
-  .err { color: #b00020; }
-  dl { display: grid; grid-template-columns: 1fr auto; gap: .3rem 1rem; }
-  dd { margin: 0; font-weight: 600; text-align: right; }
-  svg { width: 100%; height: 160px; }
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #18202e; --muted: #5d6779; --line: #e3e7ee;
+    --accent: #0f6fde; --accent-soft: #e6f0fc; --up: #c2410c; --up-soft: #fdeee6; --down: #0f7a4f; --down-soft: #e3f4ec;
+    --err: #b42318; --radius: 14px; --on-accent: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f131a; --card: #171c25; --text: #e8ecf2; --muted: #9aa4b5; --line: #2a3140;
+      --accent: #5aa2ff; --accent-soft: #1b2a40; --up: #ff9a6b; --up-soft: #3a2219; --down: #4fd39b; --down-soft: #15322a; --err: #ff8a80; --on-accent: #0b1220; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+  header h1 { margin: 0; font-size: 1.9rem; letter-spacing: -.02em; }
+  header h1 span { color: var(--accent); }
+  header p { margin: .25rem 0 0; color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-top: 20px; }
+  .step { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  h2 { margin: .2rem 0 1rem; font-size: 1.25rem; }
+  label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: .3rem; }
+  .hint { font-weight: 400; color: var(--muted); }
+  input, select { width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line);
+    border-radius: 10px; padding: .6rem .75rem; }
+  input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
+  .row > div, .grid > div { min-width: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  button { font: inherit; font-weight: 600; border: 0; border-radius: 10px; padding: .62rem 1.2rem; background: var(--accent); color: var(--on-accent); cursor: pointer; }
+  button[disabled] { opacity: .6; cursor: wait; }
+  .result { margin-top: 20px; }
+  .headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+  .big { font-size: 3rem; font-weight: 750; letter-spacing: -.03em; line-height: 1; }
+  .chip { display: inline-block; padding: .2rem .6rem; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+  .chip.up { color: var(--up); background: var(--up-soft); } .chip.down { color: var(--down); background: var(--down-soft); }
+  .chip.unchanged { color: var(--muted); background: var(--bg); }
+  .muted { color: var(--muted); font-size: .9rem; }
+  .err { color: var(--err); font-weight: 600; }
+  svg { width: 100%; height: auto; display: block; margin-top: 14px; }
+  svg text { fill: var(--muted); font-size: 11px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); }
+  .legend i { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 5px; background: var(--text); }
+  .legend i.f { background: var(--accent); } .legend i.b { height: 10px; background: var(--accent-soft); }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+  .stat { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .stat div { color: var(--muted); font-size: .82rem; } .stat b { font-size: 1.25rem; }
+  .callout { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--accent-soft); }
+  .trust { margin-top: 14px; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+  footer { margin-top: 28px; font-size: .82rem; color: var(--muted); }
+  footer a { color: var(--accent); }
 </style>
 </head>
 <body>
-<h1>Financify</h1>
+<main>
+  <header>
+    <h1>Finan<span>cify</span></h1>
+    <p>Next-month inflation for your city, and what it means for your savings goal.</p>
+  </header>
 
-<section>
-  <h2>Inflation forecast</h2>
-  <form id="f-forecast">
-    <label for="city">City</label>
-    <select id="city" name="city">{% for c in cities %}<option{% if c == "YOGYAKARTA" %} selected{% endif %}>{{ c }}</option>{% endfor %}</select>
-    <button>Forecast</button>
-  </form>
-  <div id="forecast" aria-live="polite"></div>
-</section>
+  <section class="card" aria-labelledby="h-forecast">
+    <div class="step">Step 1</div>
+    <h2 id="h-forecast">Inflation forecast</h2>
+    <form id="f-forecast" class="row">
+      <div>
+        <label for="city">City</label>
+        <select id="city">{% for c in data %}<option value="{{ c }}"{% if c == "YOGYAKARTA" %} selected{% endif %}>{{ c.title().replace("Dki ", "DKI ") }}</option>{% endfor %}</select>
+      </div>
+      <button id="b-forecast">Forecast</button>
+    </form>
+    <div id="forecast" class="result" aria-live="polite"></div>
+    <p class="trust">Model <b>{{ model }}</b>, trained on BPS city inflation since 2008{% if uses_food %} plus Bank Indonesia food prices (PIHPS){% endif %}.
+      Out-of-sample error {{ test_start }} to {{ test_end }}: <b>±{{ "%.2f"|format(mae) }} pp</b> on average
+      (a naive "same as last month" guess: ±{{ "%.2f"|format(naive_mae) }} pp).</p>
+  </section>
 
-<section id="planner" hidden>
-  <h2>How could inflation affect your goal?</h2>
-  <form id="f-plan">
-    <label for="current_savings">Current savings (Rp)</label><input id="current_savings" type="number" min="0" required value="15000000">
-    <label for="monthly_income">Monthly income (Rp)</label><input id="monthly_income" type="number" min="0" required value="10000000">
-    <label for="monthly_expenses">Monthly expenses (Rp)</label><input id="monthly_expenses" type="number" min="0" required value="6000000">
-    <label for="goal_amount">Goal amount today (Rp)</label><input id="goal_amount" type="number" min="1" required value="100000000">
-    <button>Estimate</button>
-  </form>
-  <div id="plan" aria-live="polite"></div>
-</section>
+  <section class="card" id="planner" hidden aria-labelledby="h-plan">
+    <div class="step">Step 2</div>
+    <h2 id="h-plan">How could inflation affect your goal?</h2>
+    <form id="f-plan">
+      <div class="grid">
+        <div><label for="goal_amount">Goal amount today</label><input id="goal_amount" inputmode="numeric" class="rp" value="100.000.000" required></div>
+        <div><label for="current_savings">Current savings</label><input id="current_savings" inputmode="numeric" class="rp" value="15.000.000" required></div>
+        <div><label for="monthly_income">Monthly income</label><input id="monthly_income" inputmode="numeric" class="rp" value="10.000.000" required></div>
+        <div><label for="monthly_expenses">Monthly expenses</label><input id="monthly_expenses" inputmode="numeric" class="rp" value="6.000.000" required></div>
+        <div><label for="annual_inflation">Inflation per year (%) <span class="hint">· default: last 12 months</span></label>
+          <input id="annual_inflation" inputmode="decimal"></div>
+      </div>
+      <p><button id="b-plan">Estimate</button></p>
+    </form>
+    <div id="plan" aria-live="polite"></div>
+  </section>
+
+  <footer>
+    Planning estimates only, not financial advice. Data: <a href="https://www.bps.go.id/">BPS</a> and
+    <a href="https://www.bi.go.id/hargapangan/">Bank Indonesia PIHPS</a>.
+    Source and methodology: <a href="https://github.com/farisznafis/bangkit-financify/tree/portfolio">GitHub</a>.
+  </footer>
+</main>
 
 <script>
+{% include "planner.js" %}
+</script>
+<script>
+// Forecasts for every city are computed by the trained model at render time, so the page also works as a static file.
+const DATA = {{ data|tojson }};
+const MAE = {{ mae }};
 const $ = (id) => document.getElementById(id);
 const rp = (n) => "Rp" + Math.round(n).toLocaleString("id-ID");
-const post = (url, body) => fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)})
-  .then(async r => { const j = await r.json(); if (!r.ok) throw new Error(j.error.message); return j; });
+const pct = (n) => n.toFixed(2) + "%";
+const monthName = (p) => new Date(p + "-01T00:00:00").toLocaleString("en", {month: "short", year: "numeric"});
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const cityLabel = () => $("city").selectedOptions[0].text;
 
-function chart(history, f) {
-  const pts = history.filter(h => h.inflation !== null).map(h => h.inflation).concat([f.predicted_inflation]);
-  const lo = Math.min(...pts, 0), hi = Math.max(...pts), W = 600, H = 160, n = pts.length;
-  const x = i => 10 + i * (W - 20) / (n - 1), y = v => H - 10 - (v - lo) * (H - 20) / ((hi - lo) || 1);
-  const line = pts.slice(0, -1).map((v, i) => `${x(i)},${y(v)}`).join(" ");
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Last 24 months of inflation and next-month forecast">
-    <line x1="0" x2="${W}" y1="${y(0)}" y2="${y(0)}" stroke="#d9dee8"/>
-    <polyline points="${line}" fill="none" stroke="#1d2433" stroke-width="2"/>
-    <line x1="${x(n - 2)}" y1="${y(pts[n - 2])}" x2="${x(n - 1)}" y2="${y(pts[n - 1])}" stroke="#1f5eff" stroke-width="2" stroke-dasharray="4"/>
-    <circle cx="${x(n - 1)}" cy="${y(pts[n - 1])}" r="4" fill="#1f5eff"/></svg>
-    <p class="muted">Black: actual month-to-month inflation (last 24 months). Blue: forecast.</p>`;
+
+function chart(f) {
+  const hist = f.history.filter((h) => h.inflation !== null);
+  const pts = hist.map((h) => h.inflation), fc = f.predicted_inflation;
+  const all = [...pts, fc - MAE, fc + MAE, 0];
+  const lo = Math.floor(Math.min(...all) * 2) / 2, hi = Math.ceil(Math.max(...all) * 2) / 2;
+  const W = 680, H = 240, L = 40, R = 16, T = 12, B = 28, n = pts.length + 1;
+  const x = (i) => L + i * (W - L - R) / (n - 1), y = (v) => T + (hi - v) * (H - T - B) / ((hi - lo) || 1);
+  let g = "";
+  for (let v = lo; v <= hi + 1e-9; v += 0.5) {
+    g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" ${v === 0 ? 'stroke-width="1.5"' : ""}/>`;
+    g += `<text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v.toFixed(1)}</text>`;
+  }
+  hist.forEach((h, i) => { if ((hist.length - 1 - i) % 6 === 3) g += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${monthName(h.period)}</text>`; });
+  const line = pts.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+  const xf = x(n - 1), xl = x(n - 2);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Monthly inflation for the last ${pts.length} months and the forecast for ${monthName(f.forecast_period)}">
+    ${g}
+    <rect x="${xf - 9}" y="${y(fc + MAE)}" width="18" height="${y(fc - MAE) - y(fc + MAE)}" rx="4" fill="var(--accent-soft)"/>
+    <polyline points="${line}" fill="none" stroke="var(--text)" stroke-width="2" stroke-linejoin="round"/>
+    <line x1="${xl}" y1="${y(pts[pts.length - 1])}" x2="${xf}" y2="${y(fc)}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="${xf}" cy="${y(fc)}" r="5" fill="var(--accent)"/>
+    <text x="${xf + 6}" y="${H - 8}" text-anchor="end" style="fill:var(--accent);font-weight:600">${monthName(f.forecast_period)}</text>
+  </svg>
+  <div class="legend"><span><i></i>Actual, % month-to-month</span><span><i class="f"></i>Forecast</span><span><i class="b"></i>Typical error (±${MAE.toFixed(2)} pp)</span></div>`;
 }
 
-$("f-forecast").onsubmit = async (e) => {
+$("f-forecast").onsubmit = (e) => {
   e.preventDefault();
-  try {
-    const f = await post("/api/forecast", {city: $("city").value});
-    const arrow = f.trend === "up" ? "↑" : f.trend === "down" ? "↓" : "→";
-    $("forecast").innerHTML = `<p class="muted">Forecast for ${f.forecast_period} (data through ${f.as_of})</p>
-      <p class="big">${f.predicted_inflation.toFixed(2)}%</p>
-      <p>${arrow} ${Math.abs(f.change).toFixed(2)} percentage points vs previous month (${f.previous_inflation.toFixed(2)}%)</p>
-      ${chart(f.history, f)}
-      <p class="muted">Short-term model estimate (typical test error ≈ ±0.4 pp). Not a certainty.</p>`;
-    $("planner").hidden = false;
-  } catch (err) { $("forecast").innerHTML = `<p class="err">${err.message}</p>`; }
+  {
+    try {
+      const f = DATA[$("city").value];
+      const arrow = {up: "▲", down: "▼", unchanged: "■"}[f.trend];
+      $("forecast").innerHTML = `
+        <div class="muted">${esc(cityLabel())} · forecast for ${monthName(f.forecast_period)}</div>
+        <div class="headline"><span class="big">${pct(f.predicted_inflation)}</span>
+          <span class="chip ${f.trend}">${arrow} ${Math.abs(f.change).toFixed(2)} pp vs ${monthName(f.as_of)} (${pct(f.previous_inflation)})</span></div>
+        ${chart(f)}
+        <p class="muted">Prices in ${esc(cityLabel())} rose ${pct(f.annual_inflation_12m)} over the last 12 months.
+          A one-month forecast can easily be off by ±${MAE.toFixed(2)} pp, so treat it as a direction, not a promise.</p>`;
+      $("annual_inflation").placeholder = f.annual_inflation_12m.toFixed(2);
+      $("planner").hidden = false;
+      history.replaceState(null, "", "?city=" + encodeURIComponent($("city").value));
+    } catch (err) { $("forecast").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
+  }
 };
 
-$("f-plan").onsubmit = async (e) => {
+for (const el of document.querySelectorAll(".rp")) {
+  el.addEventListener("input", () => {
+    const digits = el.value.replace(/\D/g, "");
+    el.value = digits ? Number(digits).toLocaleString("id-ID") : "";
+  });
+}
+const num = (id) => Number($(id).value.replace(/\D/g, ""));
+
+$("f-plan").onsubmit = (e) => {
   e.preventDefault();
-  const body = {city: $("city").value};
-  for (const k of ["current_savings", "monthly_income", "monthly_expenses", "goal_amount"]) body[k] = Number($(k).value);
-  try {
-    const p = await post("/api/financial-impact", body);
-    const t = p.time_to_goal;
-    $("plan").innerHTML = `<dl>
-      <dt>Goal today</dt><dd>${rp(p.goal_today)}</dd>
-      <dt>Inflation-adjusted goal</dt><dd>${rp(p.inflation_adjusted_goal)}</dd>
-      <dt>Monthly saving capacity</dt><dd>${rp(p.monthly_saving_capacity)}</dd>
-      <dt>Estimated time to goal</dt><dd>${t.years} yr ${t.months} mo</dd></dl>
-      <p class="muted">Assumes ${p.annual_inflation_assumption_pct}%/year inflation (${p.assumption_source}). ${p.note}</p>`;
-  } catch (err) { $("plan").innerHTML = `<p class="err">${err.message}</p>`; }
+  {
+    const f = DATA[$("city").value];
+    const body = {};
+    for (const k of ["current_savings", "monthly_income", "monthly_expenses", "goal_amount"]) body[k] = num(k);
+    const custom = $("annual_inflation").value.trim().replace(",", ".");
+    try {
+      const p = plan(body.current_savings, body.monthly_income, body.monthly_expenses, body.goal_amount,
+                     custom ? Number(custom) : f.annual_inflation_12m);
+      p.assumption_source = custom ? "your own assumption"
+        : `${cityLabel()} compounded month-to-month inflation, 12 months to ${monthName(f.as_of)}`;
+      const t = p.time_to_goal, s = p.monthly_saving_capacity;
+      const noInfl = Math.max(0, Math.ceil((p.goal_today - body.current_savings) / s));
+      const extra = p.months_to_goal - noInfl;
+      const dur = (y, m) => [y && `${y} yr`, m && `${m} mo`].filter(Boolean).join(" ") || "now";
+      $("plan").innerHTML = `
+        <div class="stats">
+          <div class="stat"><div>Goal today</div><b>${rp(p.goal_today)}</b></div>
+          <div class="stat"><div>Cost when you get there</div><b>${rp(p.inflation_adjusted_goal)}</b></div>
+          <div class="stat"><div>You can save per month</div><b>${rp(s)}</b></div>
+          <div class="stat"><div>Estimated time to goal</div><b>${dur(t.years, t.months)}</b></div>
+        </div>
+        <div class="callout">At ${p.annual_inflation_assumption_pct}% inflation a year, your goal will cost
+          <b>${rp(p.inflation_adjusted_goal - p.goal_today)}</b> more by the time you reach it.
+          ${extra > 0 ? `That adds <b>${extra} month${extra > 1 ? "s" : ""}</b> compared with prices staying flat.` : ""}</div>
+        <p class="muted">Inflation assumption: ${esc(p.assumption_source)}. ${esc(p.note)}</p>`;
+    } catch (err) { $("plan").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
+  }
 };
+const shared = new URLSearchParams(location.search).get("city");
+if (shared && [...$("city").options].some((o) => o.value === shared.toUpperCase())) {
+  $("city").value = shared.toUpperCase();
+  $("f-forecast").requestSubmit();
+}
 </script>
 </body>
 </html>

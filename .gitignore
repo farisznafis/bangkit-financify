@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 env/
 .env
+# PIHPS raw responses (~110 MB) are re-downloadable with `python download.py pihps`
+data/raw/pihps/*_*.json

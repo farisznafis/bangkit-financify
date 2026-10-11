@@ -90,6 +90,10 @@ def main():
         model = fit(name, cols, train_val)[0]
         preds[name] = model.predict(test[cols])
     results["test"] = {n: metrics(preds["target_inflation"], preds[n]) for n in [*BASELINES, *CANDIDATES]}
+    # Diagnostic only (selection above never sees test): how each kept ablation step of the selected model does on test.
+    results["test_ablation_diagnostic"] = [
+        {"model": selected, "groups": a["groups"], **fit_score(selected, columns(a["groups"]), train_val, test)[1]}
+        for a in results["ablation"] if a["model"] == selected and a["kept"]]
     preds.to_csv(METRICS_DIR / "test_predictions.csv", index=False, date_format="%Y-%m")
     (METRICS_DIR / "metrics.json").write_text(json.dumps(results, indent=2))
 

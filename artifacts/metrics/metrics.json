@@ -21,14 +21,16 @@
       "n": 984
     },
     "ridge": {
-      "mae": 0.3191,
-      "rmse": 0.419,
-      "n": 984
+      "mae": 0.2856,
+      "rmse": 0.3923,
+      "n": 984,
+      "n_train": 6202
     },
     "hist_gbr": {
-      "mae": 0.3178,
-      "rmse": 0.4298,
-      "n": 984
+      "mae": 0.3051,
+      "rmse": 0.409,
+      "n": 984,
+      "n_train": 6202
     }
   },
   "ablation": [
@@ -40,6 +42,7 @@
       "mae": 0.3518,
       "rmse": 0.4475,
       "n": 984,
+      "n_train": 13464,
       "kept": true
     },
     {
@@ -51,6 +54,7 @@
       "mae": 0.3511,
       "rmse": 0.4469,
       "n": 984,
+      "n_train": 13464,
       "kept": true
     },
     {
@@ -63,6 +67,7 @@
       "mae": 0.3501,
       "rmse": 0.4471,
       "n": 984,
+      "n_train": 13464,
       "kept": true
     },
     {
@@ -76,6 +81,22 @@
       "mae": 0.3191,
       "rmse": 0.419,
       "n": 984,
+      "n_train": 13464,
+      "kept": true
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality",
+        "islamic_calendar",
+        "food_prices"
+      ],
+      "mae": 0.2856,
+      "rmse": 0.3923,
+      "n": 984,
+      "n_train": 6202,
       "kept": true
     },
     {
@@ -86,6 +107,7 @@
       "mae": 0.3318,
       "rmse": 0.4372,
       "n": 984,
+      "n_train": 13464,
       "kept": true
     },
     {
@@ -97,6 +119,7 @@
       "mae": 0.3316,
       "rmse": 0.4365,
       "n": 984,
+      "n_train": 13464,
       "kept": true
     },
     {
@@ -109,6 +132,7 @@
       "mae": 0.3379,
       "rmse": 0.4525,
       "n": 984,
+      "n_train": 13464,
       "kept": false
     },
     {
@@ -121,6 +145,21 @@
       "mae": 0.3178,
       "rmse": 0.4298,
       "n": 984,
+      "n_train": 13464,
+      "kept": true
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "rolling",
+        "islamic_calendar",
+        "food_prices"
+      ],
+      "mae": 0.3051,
+      "rmse": 0.409,
+      "n": 984,
+      "n_train": 6202,
       "kept": true
     }
   ],
@@ -129,15 +168,17 @@
       "lags",
       "rolling",
       "seasonality",
-      "islamic_calendar"
+      "islamic_calendar",
+      "food_prices"
     ],
     "hist_gbr": [
       "lags",
       "rolling",
-      "islamic_calendar"
+      "islamic_calendar",
+      "food_prices"
     ]
   },
-  "selected_model": "hist_gbr",
+  "selected_model": "ridge",
   "test": {
     "naive": {
       "mae": 0.6942,
@@ -150,14 +191,76 @@
       "n": 1722
     },
     "ridge": {
-      "mae": 0.4664,
-      "rmse": 0.623,
+      "mae": 0.4943,
+      "rmse": 0.6633,
       "n": 1722
     },
     "hist_gbr": {
-      "mae": 0.4948,
-      "rmse": 0.6637,
+      "mae": 0.5138,
+      "rmse": 0.6888,
       "n": 1722
     }
-  }
+  },
+  "test_ablation_diagnostic": [
+    {
+      "model": "ridge",
+      "groups": [
+        "lags"
+      ],
+      "mae": 0.488,
+      "rmse": 0.6572,
+      "n": 1722,
+      "n_train": 14448
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling"
+      ],
+      "mae": 0.4873,
+      "rmse": 0.6563,
+      "n": 1722,
+      "n_train": 14448
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality"
+      ],
+      "mae": 0.4704,
+      "rmse": 0.644,
+      "n": 1722,
+      "n_train": 14448
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality",
+        "islamic_calendar"
+      ],
+      "mae": 0.4664,
+      "rmse": 0.623,
+      "n": 1722,
+      "n_train": 14448
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "rolling",
+        "seasonality",
+        "islamic_calendar",
+        "food_prices"
+      ],
+      "mae": 0.4943,
+      "rmse": 0.6633,
+      "n": 1722,
+      "n_train": 7186
+    }
+  ]
 }

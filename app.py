@@ -1,12 +1,30 @@
+import json
 import os
 
+import pandas as pd
 from flask import Flask, jsonify, render_template, request
 
+from src.data import ROOT
 from src.financial import PlannerError, plan
 from src.inference import ForecastError, Forecaster
 
 app = Flask(__name__)
 forecaster = Forecaster()
+METRICS = json.loads((ROOT / "artifacts" / "metrics" / "metrics.json").read_text())
+
+
+def snapshot():
+    """Latest forecast for every servable city; the UI embeds this and needs no API calls."""
+    data = {}
+    for city in forecaster.cities:
+        try:
+            data[city] = {**forecaster.forecast(city), "annual_inflation_12m": forecaster.trailing_annual_inflation(city)[0]}
+        except ForecastError:
+            pass  # latest 12-month window incomplete; left out of the dropdown
+    return data
+
+
+SNAPSHOT = snapshot()
 
 
 def error(code, message, status=400):
@@ -28,12 +46,19 @@ def body():
 
 @app.get("/")
 def index():
-    return render_template("index.html", cities=forecaster.cities)
+    test = METRICS["test"]
+    return render_template("index.html", data=SNAPSHOT, model=forecaster.model_name,
+                           mae=test[forecaster.model_name]["mae"], naive_mae=test["naive"]["mae"],
+                           uses_food=any(f.endswith("_price_mom") for f in forecaster.features),
+                           test_start=str(pd.Period(METRICS["split"]["val_end"], "M") + 1),
+                           test_end=METRICS["split"]["test_end"])
 
 
 @app.post("/api/forecast")
 def api_forecast():
-    return jsonify(forecaster.forecast(body()["city"]))
+    city = body()["city"]
+    annual, _ = forecaster.trailing_annual_inflation(city)
+    return jsonify({**forecaster.forecast(city), "annual_inflation_12m": annual})
 
 
 @app.post("/api/financial-impact")

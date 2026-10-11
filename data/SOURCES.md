@@ -53,7 +53,7 @@ Reproduce: put `BPS_API_KEY=...` in `.env` (git-ignored) and run `python downloa
 
 City mapping (CPI city → PIHPS regency): names match after removing `Kota`/`Kab.`, and the Kota wins when both exist (Cirebon, Gorontalo, Tasikmalaya). Explicit aliases: DKI JAKARTA → Kota Jakarta Pusat (PIHPS's only DKI series), PURWOKERTO → Kab. Banyumas (Purwokerto is its capital), LUBUKLINGGAU → Kota Lubuk Linggau, PADANGSIDIMPUAN → Kota Padang Sidempuan, PALANGKA RAYA → Kota Palangkaraya, PARE-PARE → Kota Parepare. All 82 modelled cities map.
 
-Reproduce: `python download.py pihps`. It uses 3 parallel requests, one quarter per request (longer ranges get slow server-side), and resumes by skipping files that already exist. A full pull takes about 2 hours.
+Reproduce: `python download.py pihps`. It uses 3 parallel requests, one quarter per request (longer ranges get slow server-side), and resumes by skipping files that already exist. A full pull took about 1 hour (4,180 requests, ~100 MB).
 
 ## Not used (yet)
 
