@@ -173,7 +173,13 @@ notebooks/             ml_pipeline.ipynb, the ML pipeline cell by cell
 
 ## Web app
 
-`docs/index.html` is a single self-contained page (~120 KB) with every city's forecast embedded. The planner runs in the browser, so the page needs no server and never sleeps. Host it on GitHub Pages (branch `portfolio`, folder `/docs`) or on a Hugging Face Static Space (see [deploy/hf-space/](deploy/hf-space/)).
+`docs/index.html` is a single self-contained page (~180 KB) with every city's forecast and the images embedded. The planner runs in the browser, so the page needs no server and never sleeps. The UI is bilingual (Indonesian and English: a toggle in the header, `?lang=id|en`, remembered per browser, defaulting to the browser language) and follows the visual design of the 2023 Android app in `MD/` (green palette, Poppins / Plus Jakarta Sans, goal categories with the same illustrations, resized into `static/img/`).
+
+Hosting options, all serving only the `docs/` folder:
+
+- **Vercel:** import the repo, set *Root Directory* to `docs`, *Framework Preset* to Other, no build command, production branch `portfolio`. Add a custom domain under Project → Settings → Domains.
+- **GitHub Pages:** branch `portfolio`, folder `/docs`.
+- **Hugging Face Static Space:** see [deploy/hf-space/](deploy/hf-space/).
 
 ## API
 

@@ -1,107 +1,149 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Financify</title>
-<meta name="description" content="Next-month city inflation forecasts for Indonesia, and what inflation means for your savings goal.">
+<meta name="description" content="Prediksi inflasi bulan depan untuk kotamu, dan dampaknya ke tujuan tabunganmu.">
+<link rel="icon" href="{{ img.logo }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
 <style>
+  /* Palette and shapes from the Android app (MD/app/src/main/res: colors.xml, drawable/*.xml). */
   :root {
-    --bg: #f6f7f9; --card: #ffffff; --text: #18202e; --muted: #5d6779; --line: #e3e7ee;
-    --accent: #0f6fde; --accent-soft: #e6f0fc; --up: #c2410c; --up-soft: #fdeee6; --down: #0f7a4f; --down-soft: #e3f4ec;
-    --err: #b42318; --radius: 14px; --on-accent: #ffffff;
+    --green: #42A186; --green-dark: #2E7D67; --green-soft: #A6CF98; --grad-a: #2EB086; --grad-b: #59CE8F;
+    --red: #DF2E38; --red-soft: #fde8e9; --down-soft: #e3f4ec; --stroke: #B9B4C7;
+    --bg: #ffffff; --card: #FCFCFC; --field: #F0F0F0; --text: #1d2420; --muted: #5f6b66; --line: #e6ebe8;
+    --on-green: #ffffff; --shadow: 0 8px 24px rgba(30, 80, 60, .14);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #0f131a; --card: #171c25; --text: #e8ecf2; --muted: #9aa4b5; --line: #2a3140;
-      --accent: #5aa2ff; --accent-soft: #1b2a40; --up: #ff9a6b; --up-soft: #3a2219; --down: #4fd39b; --down-soft: #15322a; --err: #ff8a80; --on-accent: #0b1220; }
+    :root { --green: #4fc4a2; --green-dark: #8fe0c6; --red: #ff7b82; --red-soft: #3a1d20; --down-soft: #163328;
+      --bg: #0f1513; --card: #18201d; --field: #222c28; --text: #e6efea; --muted: #9db0a8; --line: #2a3531;
+      --on-green: #0b1410; --shadow: 0 8px 24px rgba(0, 0, 0, .45); }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
-  header h1 { margin: 0; font-size: 1.9rem; letter-spacing: -.02em; }
-  header h1 span { color: var(--accent); }
-  header p { margin: .25rem 0 0; color: var(--muted); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-top: 20px; }
-  .step { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-  h2 { margin: .2rem 0 1rem; font-size: 1.25rem; }
-  label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: .3rem; }
-  .hint { font-weight: 400; color: var(--muted); }
-  input, select { width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line);
-    border-radius: 10px; padding: .6rem .75rem; }
-  input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  h1, h2, h3, .big, button, .stat b { font-family: Poppins, "Plus Jakarta Sans", system-ui, sans-serif; }
+
+  .hero { background: linear-gradient(160deg, var(--grad-a), #42A186 60%, var(--green-soft)); padding: 22px 16px 86px; color: #fff; }
+  .hero-in { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 10px; position: relative; }
+  .lang { position: absolute; right: 0; padding: .35rem .8rem; font-size: .85rem; border-radius: 100px;
+    background: rgba(255, 255, 255, .18); color: #fff; border: 2px solid rgba(255, 255, 255, .7); }
+  .logo { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: grid; place-items: center; }
+  .logo img { width: 30px; height: 30px; }
+  .hero h1 { margin: 0; font-size: 1.7rem; font-style: italic; font-weight: 700; letter-spacing: -.01em; }
+
+  main { max-width: 760px; margin: -66px auto 0; padding: 0 16px 48px; }
+  .card { background: var(--card); border-radius: 20px; padding: 22px; margin-top: 20px; box-shadow: var(--shadow); }
+  .greet { text-align: center; border-radius: 8px; padding: 18px 16px; margin-top: 0; }
+  .greet h2 { margin: 0; color: var(--green); font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: 1.45rem; }
+  .greet p { margin: .3rem 0 0; color: var(--muted); }
+  .step { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
+  h2.title { margin: .15rem 0 1rem; font-size: 1.35rem; font-weight: 600; }
+
+  label { display: block; font-size: .92rem; margin-bottom: .3rem; color: var(--text); }
+  .hint { color: var(--muted); font-size: .82rem; }
+  input, select { width: 100%; font: 16px "Plus Jakarta Sans", system-ui, sans-serif; color: var(--text); background: var(--field);
+    border: 2px solid transparent; border-radius: 12px; padding: .8rem .9rem; }
+  input:focus, select:focus { outline: none; border-color: var(--green); }
+  button:focus-visible, .cat:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
   .row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
   .row > div, .grid > div { min-width: 0; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
-  button { font: inherit; font-weight: 600; border: 0; border-radius: 10px; padding: .62rem 1.2rem; background: var(--accent); color: var(--on-accent); cursor: pointer; }
-  button[disabled] { opacity: .6; cursor: wait; }
+  button { font-size: 1rem; font-weight: 700; border: 0; border-radius: 10px; padding: .8rem 1.4rem; background: var(--green); color: var(--on-green); cursor: pointer; }
+  button.wide { width: 100%; margin-top: 18px; }
+  button:hover { filter: brightness(1.05); }
+
+  .cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
+  @media (max-width: 560px) { .cats { grid-template-columns: repeat(2, 1fr); } }
+  .cat { font: inherit; text-align: left; color: var(--text); background: var(--bg); border: 2px solid var(--line); border-radius: 20px;
+    padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; font-weight: 400; }
+  .cat img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 14px; background: #fff; }
+  .cat b { font-family: Poppins, sans-serif; font-weight: 500; font-size: .95rem; margin-top: 4px; }
+  .cat span { font-size: .75rem; color: var(--muted); line-height: 1.35; }
+  .cat[aria-pressed="true"] { border-color: var(--green); background: var(--down-soft); }
+
   .result { margin-top: 20px; }
-  .headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
-  .big { font-size: 3rem; font-weight: 750; letter-spacing: -.03em; line-height: 1; }
-  .chip { display: inline-block; padding: .2rem .6rem; border-radius: 999px; font-size: .85rem; font-weight: 600; }
-  .chip.up { color: var(--up); background: var(--up-soft); } .chip.down { color: var(--down); background: var(--down-soft); }
-  .chip.unchanged { color: var(--muted); background: var(--bg); }
+  .headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  .big { font-size: 3rem; font-weight: 700; letter-spacing: -.03em; line-height: 1; color: var(--green-dark); }
+  .chip { display: inline-block; padding: .25rem .7rem; border-radius: 100px; font-size: .85rem; font-weight: 600; border: 2px solid currentColor; }
+  .chip.up { color: var(--red); background: var(--red-soft); } .chip.down { color: var(--green); background: var(--down-soft); }
+  .chip.unchanged { color: var(--muted); background: var(--field); }
   .muted { color: var(--muted); font-size: .9rem; }
-  .err { color: var(--err); font-weight: 600; }
+  .err { color: var(--red); font-weight: 600; }
   svg { width: 100%; height: auto; display: block; margin-top: 14px; }
-  svg text { fill: var(--muted); font-size: 11px; }
+  svg text { fill: var(--muted); font-size: 11px; font-family: "Plus Jakarta Sans", sans-serif; }
   .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); }
   .legend i { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 5px; background: var(--text); }
-  .legend i.f { background: var(--accent); } .legend i.b { height: 10px; background: var(--accent-soft); }
-  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
-  .stat { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-  .stat div { color: var(--muted); font-size: .82rem; } .stat b { font-size: 1.25rem; }
-  .callout { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--accent-soft); }
-  .trust { margin-top: 14px; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
-  footer { margin-top: 28px; font-size: .82rem; color: var(--muted); }
-  footer a { color: var(--accent); }
+  .legend i.f { background: var(--green); } .legend i.b { height: 10px; background: var(--down-soft); }
+
+  .res-title { text-align: center; font-size: 1.4rem; font-weight: 500; margin: 26px 0 12px; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat { border-radius: 14px; padding: 14px; background: var(--field); }
+  .stat div { color: var(--green); font-size: .88rem; font-weight: 600; } .stat b { font-size: 1.2rem; font-weight: 600; }
+  .stat.hl { background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); color: #fff; }
+  .stat.hl div { color: rgba(255, 255, 255, .9); }
+  .callout { margin-top: 14px; padding: 14px; border-radius: 14px; border: 2px dashed var(--green-soft); }
+  .trust { margin-top: 16px; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+  footer { margin-top: 28px; font-size: .82rem; color: var(--muted); text-align: center; }
+  footer a { color: var(--green); }
 </style>
 </head>
 <body>
+<header class="hero">
+  <div class="hero-in">
+    <span class="logo"><img src="{{ img.logo }}" alt=""></span>
+    <h1>Financify</h1>
+    <button type="button" class="lang" id="lang" aria-label="Switch language"></button>
+  </div>
+</header>
+
 <main>
-  <header>
-    <h1>Finan<span>cify</span></h1>
-    <p>Next-month inflation for your city, and what it means for your savings goal.</p>
-  </header>
+  <section class="card greet">
+    <h2 data-i18n="greet_title"></h2>
+    <p data-i18n="greet_sub"></p>
+  </section>
 
   <section class="card" aria-labelledby="h-forecast">
-    <div class="step">Step 1</div>
-    <h2 id="h-forecast">Inflation forecast</h2>
+    <div class="step" data-i18n="step1"></div>
+    <h2 class="title" id="h-forecast" data-i18n="forecast_title"></h2>
     <form id="f-forecast" class="row">
       <div>
-        <label for="city">City</label>
+        <label for="city" data-i18n="city"></label>
         <select id="city">{% for c in data %}<option value="{{ c }}"{% if c == "YOGYAKARTA" %} selected{% endif %}>{{ c.title().replace("Dki ", "DKI ") }}</option>{% endfor %}</select>
       </div>
-      <button id="b-forecast">Forecast</button>
+      <button id="b-forecast" data-i18n="check"></button>
     </form>
     <div id="forecast" class="result" aria-live="polite"></div>
-    <p class="trust">Model <b>{{ model }}</b>, trained on BPS city inflation since 2008{% if uses_food %} plus Bank Indonesia food prices (PIHPS){% endif %}.
-      Out-of-sample error {{ test_start }} to {{ test_end }}: <b>±{{ "%.2f"|format(mae) }} pp</b> on average
-      (a naive "same as last month" guess: ±{{ "%.2f"|format(naive_mae) }} pp).</p>
+    <p class="trust" id="trust"></p>
   </section>
 
   <section class="card" id="planner" hidden aria-labelledby="h-plan">
-    <div class="step">Step 2</div>
-    <h2 id="h-plan">How could inflation affect your goal?</h2>
+    <div class="step" data-i18n="step2"></div>
+    <h2 class="title" id="h-plan" data-i18n="plan_title"></h2>
+    <p class="muted" style="margin-top:-.6rem" data-i18n="plan_sub"></p>
+    <div class="cats" role="group" data-i18n-aria="categories">
+      <button type="button" class="cat" data-cat="vehicle" data-goal="250000000" aria-pressed="false"><img src="{{ img.car }}" alt=""><b data-i18n="cat_vehicle"></b><span data-i18n="cat_vehicle_sub"></span></button>
+      <button type="button" class="cat" data-cat="gadget" data-goal="20000000" aria-pressed="false"><img src="{{ img.phone }}" alt=""><b data-i18n="cat_gadget"></b><span data-i18n="cat_gadget_sub"></span></button>
+      <button type="button" class="cat" data-cat="wedding" data-goal="150000000" aria-pressed="false"><img src="{{ img.pernikahan }}" alt=""><b data-i18n="cat_wedding"></b><span data-i18n="cat_wedding_sub"></span></button>
+      <button type="button" class="cat" data-cat="travel" data-goal="30000000" aria-pressed="false"><img src="{{ img.travel }}" alt=""><b data-i18n="cat_travel"></b><span data-i18n="cat_travel_sub"></span></button>
+    </div>
     <form id="f-plan">
       <div class="grid">
-        <div><label for="goal_amount">Goal amount today</label><input id="goal_amount" inputmode="numeric" class="rp" value="100.000.000" required></div>
-        <div><label for="current_savings">Current savings</label><input id="current_savings" inputmode="numeric" class="rp" value="15.000.000" required></div>
-        <div><label for="monthly_income">Monthly income</label><input id="monthly_income" inputmode="numeric" class="rp" value="10.000.000" required></div>
-        <div><label for="monthly_expenses">Monthly expenses</label><input id="monthly_expenses" inputmode="numeric" class="rp" value="6.000.000" required></div>
-        <div><label for="annual_inflation">Inflation per year (%) <span class="hint">· default: last 12 months</span></label>
-          <input id="annual_inflation" inputmode="decimal"></div>
+        <div><label for="goal_amount" data-i18n="goal"></label><input id="goal_amount" inputmode="numeric" class="rp" value="100.000.000" required></div>
+        <div><label for="current_savings" data-i18n="savings"></label><input id="current_savings" inputmode="numeric" class="rp" value="15.000.000" required></div>
+        <div><label for="monthly_income" data-i18n="income"></label><input id="monthly_income" inputmode="numeric" class="rp" value="10.000.000" required></div>
+        <div><label for="monthly_expenses" data-i18n="expenses"></label><input id="monthly_expenses" inputmode="numeric" class="rp" value="6.000.000" required></div>
+        <div><label for="annual_inflation" data-i18n="inflation_input"></label><input id="annual_inflation" inputmode="decimal"></div>
       </div>
-      <p><button id="b-plan">Estimate</button></p>
+      <button id="b-plan" class="wide" data-i18n="calculate"></button>
     </form>
     <div id="plan" aria-live="polite"></div>
   </section>
 
-  <footer>
-    Planning estimates only, not financial advice. Data: <a href="https://www.bps.go.id/">BPS</a> and
-    <a href="https://www.bi.go.id/hargapangan/">Bank Indonesia PIHPS</a>.
-    Source and methodology: <a href="https://github.com/farisznafis/bangkit-financify/tree/portfolio">GitHub</a>.
-  </footer>
+  <footer data-i18n="footer"></footer>
 </main>
 
 <script>
@@ -110,14 +152,95 @@
 <script>
 // Forecasts for every city are computed by the trained model at render time, so the page also works as a static file.
 const DATA = {{ data|tojson }};
-const MAE = {{ mae }};
-const $ = (id) => document.getElementById(id);
-const rp = (n) => "Rp" + Math.round(n).toLocaleString("id-ID");
-const pct = (n) => n.toFixed(2) + "%";
-const monthName = (p) => new Date(p + "-01T00:00:00").toLocaleString("en", {month: "short", year: "numeric"});
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
-const cityLabel = () => $("city").selectedOptions[0].text;
+const MAE = {{ mae }}, NAIVE_MAE = {{ naive_mae }}, MODEL = {{ model|tojson }}, USES_FOOD = {{ uses_food|tojson }};
+const TEST = [{{ test_start|tojson }}, {{ test_end|tojson }}];
 
+const STR = {
+  id: {
+    switch_to: "EN", greet_title: "Heyyo FinSquad!", greet_sub: "Let's go cek inflasi dan lihat seberapa lama kamu meraih tujuanmu",
+    step1: "Langkah 1", forecast_title: "Cek inflasi kotamu", city: "Kota", check: "Cek",
+    trust: "Model <b>{model}</b>, dilatih dari data inflasi kota BPS sejak 2008{food}. Rata-rata meleset <b>±{mae} poin persen</b> pada {start} s.d. {end} (tebakan \"sama seperti bulan lalu\": ±{naive}).",
+    trust_food: " dan harga pangan Bank Indonesia (PIHPS)",
+    forecast_for: "{city} · prediksi {month}", vs: "{change} poin vs {month} ({prev})",
+    trend: {up: "▲ naik", down: "▼ turun", unchanged: "■ tetap"},
+    forecast_note: "Harga di {city} naik {annual} dalam 12 bulan terakhir. Prediksi satu bulan bisa meleset ±{mae} poin, jadi anggap ini sebagai arah, bukan janji.",
+    chart_aria: "Inflasi bulanan {n} bulan terakhir dan prediksi untuk {month}",
+    legend_actual: "Aktual, % per bulan", legend_fc: "Prediksi", legend_band: "Rentang meleset (±{mae} poin)",
+    step2: "Langkah 2", plan_title: "Ayo Hitung Keuanganmu!", plan_sub: "Pilih kategori tujuanmu, atau langsung isi nominalnya.",
+    categories: "Kategori tujuan",
+    cat_vehicle: "Kendaraan", cat_vehicle_sub: "Biar kemana-mana engga jalan kaki lagi, ya kan?",
+    cat_gadget: "Gadget", cat_gadget_sub: "Semakin canggih speknya, sehari-hari makin enak!",
+    cat_wedding: "Pernikahan", cat_wedding_sub: "Kalau sudah terpenuhi, tinggal cari pasangannya, deh",
+    cat_travel: "Traveling", cat_travel_sub: "Waktunya keliling bumi dan lihat keajaiban dunia",
+    goal: "Nominal tujuan (harga hari ini)", savings: "Tabungan saat ini", income: "Pendapatan per bulan", expenses: "Pengeluaran per bulan",
+    inflation_input: "Inflasi per tahun (%) <span class=\"hint\">· kosongkan = 12 bulan terakhir</span>", calculate: "Hitung",
+    result: "Hasil Prediksi", reached: "Estimasi tercapai", trend_next: "Trend inflasi bulan depan",
+    cost_then: "Harga tujuan saat tercapai", per_month: "Bisa ditabung per bulan",
+    years: "{n} tahun", months: "{n} bulan", now: "sekarang",
+    callout: "Dengan inflasi {rate} per tahun, tujuanmu akan <b>{more}</b> lebih mahal saat kamu mencapainya.",
+    callout_extra: "Itu menambah <b>{n} bulan</b> dibanding kalau harga tidak naik.",
+    source_custom: "asumsimu sendiri", source_city: "inflasi {city} 12 bulan terakhir (s.d. {month})",
+    assumption: "Asumsi inflasi: {source}. Estimasi perencanaan, bukan nasihat keuangan. Menganggap pendapatan, pengeluaran, dan inflasi tetap, serta tabungan tidak berbunga.",
+    errors: {
+      invalid_input: "Isi semua kolom dengan angka yang valid (inflasi antara -50% dan 100%).",
+      negative_input: "Nominal tidak boleh negatif.",
+      invalid_goal: "Nominal tujuan harus lebih dari 0.",
+      no_saving_capacity: "Pengeluaran harus lebih kecil dari pendapatan supaya bisa menabung.",
+      goal_unreachable: "Dengan asumsi ini, tujuanmu tidak tercapai dalam 100 tahun.",
+    },
+    footer: "Estimasi perencanaan, bukan nasihat keuangan. Data: <a href=\"https://www.bps.go.id/\">BPS</a> dan <a href=\"https://www.bi.go.id/hargapangan/\">Bank Indonesia PIHPS</a>. Kode dan metodologi: <a href=\"https://github.com/farisznafis/bangkit-financify/tree/portfolio\">GitHub</a>.",
+  },
+  en: {
+    switch_to: "ID", greet_title: "Heyyo FinSquad!", greet_sub: "Check your city's inflation and see how long it takes to reach your goal",
+    step1: "Step 1", forecast_title: "Check your city's inflation", city: "City", check: "Check",
+    trust: "Model <b>{model}</b>, trained on BPS city inflation since 2008{food}. Average error <b>±{mae} percentage points</b> from {start} to {end} (a naive \"same as last month\" guess: ±{naive}).",
+    trust_food: " plus Bank Indonesia food prices (PIHPS)",
+    forecast_for: "{city} · forecast for {month}", vs: "{change} pp vs {month} ({prev})",
+    trend: {up: "▲ up", down: "▼ down", unchanged: "■ flat"},
+    forecast_note: "Prices in {city} rose {annual} over the last 12 months. A one-month forecast can easily be off by ±{mae} pp, so treat it as a direction, not a promise.",
+    chart_aria: "Monthly inflation for the last {n} months and the forecast for {month}",
+    legend_actual: "Actual, % month-to-month", legend_fc: "Forecast", legend_band: "Typical error (±{mae} pp)",
+    step2: "Step 2", plan_title: "Let's plan your money!", plan_sub: "Pick a goal category, or type the amount directly.",
+    categories: "Goal categories",
+    cat_vehicle: "Vehicle", cat_vehicle_sub: "No more walking everywhere, right?",
+    cat_gadget: "Gadget", cat_gadget_sub: "Better specs make every day easier!",
+    cat_wedding: "Wedding", cat_wedding_sub: "Once it's funded, you just need a partner",
+    cat_travel: "Traveling", cat_travel_sub: "Time to travel the world and see its wonders",
+    goal: "Goal amount (today's price)", savings: "Current savings", income: "Monthly income", expenses: "Monthly expenses",
+    inflation_input: "Inflation per year (%) <span class=\"hint\">· empty = last 12 months</span>", calculate: "Calculate",
+    result: "Your estimate", reached: "Time to goal", trend_next: "Next month's inflation trend",
+    cost_then: "Goal cost when reached", per_month: "You can save per month",
+    years: "{n} yr", months: "{n} mo", now: "now",
+    callout: "At {rate} inflation a year, your goal will cost <b>{more}</b> more by the time you reach it.",
+    callout_extra: "That adds <b>{n} months</b> compared with prices staying flat.",
+    source_custom: "your own assumption", source_city: "{city} inflation over the last 12 months (to {month})",
+    assumption: "Inflation assumption: {source}. Planning estimate, not financial advice. Assumes constant income, expenses and inflation, and no return on savings.",
+    errors: {
+      invalid_input: "Fill every field with a valid number (inflation between -50% and 100%).",
+      negative_input: "Amounts must not be negative.",
+      invalid_goal: "The goal amount must be greater than 0.",
+      no_saving_capacity: "Expenses must be lower than income to save anything.",
+      goal_unreachable: "Under this assumption the goal is not reachable within 100 years.",
+    },
+    footer: "Planning estimates only, not financial advice. Data: <a href=\"https://www.bps.go.id/\">BPS</a> and <a href=\"https://www.bi.go.id/hargapangan/\">Bank Indonesia PIHPS</a>. Source and methodology: <a href=\"https://github.com/farisznafis/bangkit-financify/tree/portfolio\">GitHub</a>.",
+  },
+};
+const LOCALE = {id: "id-ID", en: "en-US"};
+
+const params = new URLSearchParams(location.search);
+const stored = (() => { try { return localStorage.getItem("lang"); } catch { return null; } })();
+let lang = [params.get("lang"), stored, navigator.language.slice(0, 2)].find((l) => l in STR) || "id";
+
+const $ = (id) => document.getElementById(id);
+// Strings are our own; only values passed in through esc() come from the page state.
+const t = (key, vars = {}) => STR[lang][key].replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+const rp = (n) => "Rp" + Math.round(n).toLocaleString("id-ID");  // Rupiah keeps Indonesian grouping in both languages
+const dec = (n) => n.toLocaleString(LOCALE[lang], {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const pct = (n) => dec(n) + "%";
+const monthName = (p) => new Date(p + "-01T00:00:00").toLocaleString(LOCALE[lang], {month: "short", year: "numeric"});
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const cityLabel = () => esc($("city").selectedOptions[0].text);
+const trend = (f) => STR[lang].trend[f.trend];
 
 function chart(f) {
   const hist = f.history.filter((h) => h.inflation !== null);
@@ -129,81 +252,110 @@ function chart(f) {
   let g = "";
   for (let v = lo; v <= hi + 1e-9; v += 0.5) {
     g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" ${v === 0 ? 'stroke-width="1.5"' : ""}/>`;
-    g += `<text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v.toFixed(1)}</text>`;
+    g += `<text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v.toLocaleString(LOCALE[lang], {minimumFractionDigits: 1})}</text>`;
   }
   hist.forEach((h, i) => { if ((hist.length - 1 - i) % 6 === 3) g += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${monthName(h.period)}</text>`; });
   const line = pts.map((v, i) => `${x(i)},${y(v)}`).join(" ");
   const xf = x(n - 1), xl = x(n - 2);
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Monthly inflation for the last ${pts.length} months and the forecast for ${monthName(f.forecast_period)}">
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("chart_aria", {n: pts.length, month: monthName(f.forecast_period)})}">
     ${g}
-    <rect x="${xf - 9}" y="${y(fc + MAE)}" width="18" height="${y(fc - MAE) - y(fc + MAE)}" rx="4" fill="var(--accent-soft)"/>
+    <rect x="${xf - 9}" y="${y(fc + MAE)}" width="18" height="${y(fc - MAE) - y(fc + MAE)}" rx="4" fill="var(--down-soft)"/>
     <polyline points="${line}" fill="none" stroke="var(--text)" stroke-width="2" stroke-linejoin="round"/>
-    <line x1="${xl}" y1="${y(pts[pts.length - 1])}" x2="${xf}" y2="${y(fc)}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>
-    <circle cx="${xf}" cy="${y(fc)}" r="5" fill="var(--accent)"/>
-    <text x="${xf + 6}" y="${H - 8}" text-anchor="end" style="fill:var(--accent);font-weight:600">${monthName(f.forecast_period)}</text>
+    <line x1="${xl}" y1="${y(pts[pts.length - 1])}" x2="${xf}" y2="${y(fc)}" stroke="var(--green)" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="${xf}" cy="${y(fc)}" r="5" fill="var(--green)"/>
+    <text x="${xf + 6}" y="${H - 8}" text-anchor="end" style="fill:var(--green);font-weight:600">${monthName(f.forecast_period)}</text>
   </svg>
-  <div class="legend"><span><i></i>Actual, % month-to-month</span><span><i class="f"></i>Forecast</span><span><i class="b"></i>Typical error (±${MAE.toFixed(2)} pp)</span></div>`;
+  <div class="legend"><span><i></i>${t("legend_actual")}</span><span><i class="f"></i>${t("legend_fc")}</span><span><i class="b"></i>${t("legend_band", {mae: dec(MAE)})}</span></div>`;
+}
+
+function syncUrl() {
+  const q = new URLSearchParams(location.search);
+  q.set("lang", lang);
+  if (!$("planner").hidden) q.set("city", $("city").value);
+  history.replaceState(null, "", "?" + q);
 }
 
 $("f-forecast").onsubmit = (e) => {
   e.preventDefault();
-  {
-    try {
-      const f = DATA[$("city").value];
-      const arrow = {up: "▲", down: "▼", unchanged: "■"}[f.trend];
-      $("forecast").innerHTML = `
-        <div class="muted">${esc(cityLabel())} · forecast for ${monthName(f.forecast_period)}</div>
-        <div class="headline"><span class="big">${pct(f.predicted_inflation)}</span>
-          <span class="chip ${f.trend}">${arrow} ${Math.abs(f.change).toFixed(2)} pp vs ${monthName(f.as_of)} (${pct(f.previous_inflation)})</span></div>
-        ${chart(f)}
-        <p class="muted">Prices in ${esc(cityLabel())} rose ${pct(f.annual_inflation_12m)} over the last 12 months.
-          A one-month forecast can easily be off by ±${MAE.toFixed(2)} pp, so treat it as a direction, not a promise.</p>`;
-      $("annual_inflation").placeholder = f.annual_inflation_12m.toFixed(2);
-      $("planner").hidden = false;
-      history.replaceState(null, "", "?city=" + encodeURIComponent($("city").value));
-    } catch (err) { $("forecast").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
-  }
+  try {
+    const f = DATA[$("city").value];
+    $("forecast").innerHTML = `
+      <div class="muted">${t("forecast_for", {city: cityLabel(), month: monthName(f.forecast_period)})}</div>
+      <div class="headline"><span class="big">${pct(f.predicted_inflation)}</span>
+        <span class="chip ${f.trend}">${trend(f)} ${t("vs", {change: dec(Math.abs(f.change)), month: monthName(f.as_of), prev: pct(f.previous_inflation)})}</span></div>
+      ${chart(f)}
+      <p class="muted">${t("forecast_note", {city: cityLabel(), annual: pct(f.annual_inflation_12m), mae: dec(MAE)})}</p>`;
+    $("annual_inflation").placeholder = dec(f.annual_inflation_12m);
+    $("planner").hidden = false;
+    syncUrl();
+  } catch (err) { $("forecast").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
 };
 
+const fmt = (digits) => digits ? Number(digits).toLocaleString("id-ID") : "";
 for (const el of document.querySelectorAll(".rp")) {
-  el.addEventListener("input", () => {
-    const digits = el.value.replace(/\D/g, "");
-    el.value = digits ? Number(digits).toLocaleString("id-ID") : "";
-  });
+  el.addEventListener("input", () => { el.value = fmt(el.value.replace(/\D/g, "")); });
 }
 const num = (id) => Number($(id).value.replace(/\D/g, ""));
 
+let category = null;
+for (const c of document.querySelectorAll(".cat")) {
+  c.onclick = () => {
+    for (const o of document.querySelectorAll(".cat")) o.setAttribute("aria-pressed", String(o === c));
+    category = c.dataset.cat;
+    $("goal_amount").value = fmt(c.dataset.goal);  // example amount; the user edits it
+    $("goal_amount").focus();
+  };
+}
+
 $("f-plan").onsubmit = (e) => {
   e.preventDefault();
-  {
-    const f = DATA[$("city").value];
-    const body = {};
-    for (const k of ["current_savings", "monthly_income", "monthly_expenses", "goal_amount"]) body[k] = num(k);
-    const custom = $("annual_inflation").value.trim().replace(",", ".");
-    try {
-      const p = plan(body.current_savings, body.monthly_income, body.monthly_expenses, body.goal_amount,
-                     custom ? Number(custom) : f.annual_inflation_12m);
-      p.assumption_source = custom ? "your own assumption"
-        : `${cityLabel()} compounded month-to-month inflation, 12 months to ${monthName(f.as_of)}`;
-      const t = p.time_to_goal, s = p.monthly_saving_capacity;
-      const noInfl = Math.max(0, Math.ceil((p.goal_today - body.current_savings) / s));
-      const extra = p.months_to_goal - noInfl;
-      const dur = (y, m) => [y && `${y} yr`, m && `${m} mo`].filter(Boolean).join(" ") || "now";
-      $("plan").innerHTML = `
-        <div class="stats">
-          <div class="stat"><div>Goal today</div><b>${rp(p.goal_today)}</b></div>
-          <div class="stat"><div>Cost when you get there</div><b>${rp(p.inflation_adjusted_goal)}</b></div>
-          <div class="stat"><div>You can save per month</div><b>${rp(s)}</b></div>
-          <div class="stat"><div>Estimated time to goal</div><b>${dur(t.years, t.months)}</b></div>
-        </div>
-        <div class="callout">At ${p.annual_inflation_assumption_pct}% inflation a year, your goal will cost
-          <b>${rp(p.inflation_adjusted_goal - p.goal_today)}</b> more by the time you reach it.
-          ${extra > 0 ? `That adds <b>${extra} month${extra > 1 ? "s" : ""}</b> compared with prices staying flat.` : ""}</div>
-        <p class="muted">Inflation assumption: ${esc(p.assumption_source)}. ${esc(p.note)}</p>`;
-    } catch (err) { $("plan").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
-  }
+  const f = DATA[$("city").value];
+  const body = {};
+  for (const k of ["current_savings", "monthly_income", "monthly_expenses", "goal_amount"]) body[k] = num(k);
+  const custom = $("annual_inflation").value.trim().replace(",", ".");
+  try {
+    const p = plan(body.current_savings, body.monthly_income, body.monthly_expenses, body.goal_amount,
+                   custom ? Number(custom) : f.annual_inflation_12m);
+    const source = custom ? t("source_custom") : t("source_city", {city: cityLabel(), month: monthName(f.as_of)});
+    const tg = p.time_to_goal, s = p.monthly_saving_capacity;
+    const noInfl = Math.max(0, Math.ceil((p.goal_today - body.current_savings) / s));
+    const extra = p.months_to_goal - noInfl;
+    const dur = [tg.years && t("years", {n: tg.years}), tg.months && t("months", {n: tg.months})].filter(Boolean).join(" ") || t("now");
+    $("plan").innerHTML = `
+      <h3 class="res-title">${t("result")}${category ? ` · ${t("cat_" + category)}` : ""}</h3>
+      <div class="stats">
+        <div class="stat hl"><div>${t("reached")}</div><b>${dur}</b></div>
+        <div class="stat"><div>${t("trend_next")}</div><b>${trend(f)}</b></div>
+        <div class="stat"><div>${t("cost_then")}</div><b>${rp(p.inflation_adjusted_goal)}</b></div>
+        <div class="stat"><div>${t("per_month")}</div><b>${rp(s)}</b></div>
+      </div>
+      <div class="callout">${t("callout", {rate: pct(p.annual_inflation_assumption_pct), more: rp(p.inflation_adjusted_goal - p.goal_today)})}
+        ${extra > 0 ? t("callout_extra", {n: extra}) : ""}</div>
+      <p class="muted">${t("assumption", {source})}</p>`;
+  } catch (err) { $("plan").innerHTML = `<p class="err">${esc(STR[lang].errors[err.code] || err.message)}</p>`; }
 };
-const shared = new URLSearchParams(location.search).get("city");
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  for (const el of document.querySelectorAll("[data-i18n]")) el.innerHTML = t(el.dataset.i18n);
+  for (const el of document.querySelectorAll("[data-i18n-aria]")) el.setAttribute("aria-label", t(el.dataset.i18nAria));
+  $("trust").innerHTML = t("trust", {model: esc(MODEL), food: USES_FOOD ? t("trust_food") : "", mae: dec(MAE),
+                                     naive: dec(NAIVE_MAE), start: TEST[0], end: TEST[1]});
+  $("lang").textContent = t("switch_to");
+  // re-render whatever result is on screen in the new language
+  if (!$("planner").hidden) $("f-forecast").requestSubmit();
+  if ($("plan").innerHTML) $("f-plan").requestSubmit();
+}
+
+$("lang").onclick = () => {
+  lang = lang === "id" ? "en" : "id";
+  try { localStorage.setItem("lang", lang); } catch {}
+  applyLang();
+  syncUrl();
+};
+
+applyLang();
+const shared = params.get("city");
 if (shared && [...$("city").options].some((o) => o.value === shared.toUpperCase())) {
   $("city").value = shared.toUpperCase();
   $("f-forecast").requestSubmit();

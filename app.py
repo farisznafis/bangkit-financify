@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 
@@ -11,6 +12,9 @@ from src.inference import ForecastError, Forecaster
 app = Flask(__name__)
 forecaster = Forecaster()
 METRICS = json.loads((ROOT / "artifacts" / "metrics" / "metrics.json").read_text())
+# Inlined as data URIs so the exported page stays a single self-contained file.
+IMAGES = {p.stem: "data:image/webp;base64," + base64.b64encode(p.read_bytes()).decode()
+          for p in (ROOT / "static" / "img").glob("*.webp")}
 
 
 def snapshot():
@@ -47,7 +51,7 @@ def body():
 @app.get("/")
 def index():
     test = METRICS["test"]
-    return render_template("index.html", data=SNAPSHOT, model=forecaster.model_name,
+    return render_template("index.html", data=SNAPSHOT, model=forecaster.model_name, img=IMAGES,
                            mae=test[forecaster.model_name]["mae"], naive_mae=test["naive"]["mae"],
                            uses_food=any(f.endswith("_price_mom") for f in forecaster.features),
                            test_start=str(pd.Period(METRICS["split"]["val_end"], "M") + 1),
