@@ -47,13 +47,13 @@ Reproduce: put `BPS_API_KEY=...` in `.env` (git-ignored) and run `python downloa
 | retrieval_date | see `raw/pihps/RETRIEVED` (first pull 2026-10-11) |
 | geographic_level | regency/city (110 PIHPS regencies) |
 | frequency | daily (trading days), 2017-07 to the retrieval date |
-| raw_filename | one JSON per regency per quarter, plus `regencies.json` (regency → province) |
-| commodities | category averages (level-1 rows): Beras, Daging Ayam, Telur Ayam, Bawang Merah, Cabai Merah |
-| processing_notes | `src/pihps.py`. Monthly mean of daily prices, set to NaN when a month has fewer than 10 priced days. Feature = month-on-month % change of that mean. PIHPS's own "Laporan Bulanan" is **not** used because it is the price on the first trading day of the month, not an average. |
+| raw_filename | `<regency_id>_<quarter>.json` (first commodity set) and `<regency_id>_<quarter>_b.json` (second set, pulled later), plus `regencies.json` (regency → province) |
+| commodities | category averages (level-1 rows). Set 1: Beras, Daging Ayam, Telur Ayam, Bawang Merah, Cabai Merah. Set 2 (`_b`): Daging Sapi, Bawang Putih, Cabai Rawit, Minyak Goreng, Gula Pasir |
+| processing_notes | `src/pihps.py`. Monthly mean of daily prices, set to NaN when a month has fewer than 10 priced days. Features: month-on-month % change of that mean, and a nowcast = mean of the first 5 priced days of the target month vs the mean of month t (NaN until 5 days exist). Missing values become 0 plus a per-group missing flag. PIHPS's own "Laporan Bulanan" is **not** used because it is the price on the first trading day of the month, not an average. |
 
 City mapping (CPI city → PIHPS regency): names match after removing `Kota`/`Kab.`, and the Kota wins when both exist (Cirebon, Gorontalo, Tasikmalaya). Explicit aliases: DKI JAKARTA → Kota Jakarta Pusat (PIHPS's only DKI series), PURWOKERTO → Kab. Banyumas (Purwokerto is its capital), LUBUKLINGGAU → Kota Lubuk Linggau, PADANGSIDIMPUAN → Kota Padang Sidempuan, PALANGKA RAYA → Kota Palangkaraya, PARE-PARE → Kota Parepare. All 82 modelled cities map.
 
-Reproduce: `python download.py pihps`. It uses 3 parallel requests, one quarter per request (longer ranges get slow server-side), and resumes by skipping files that already exist. A full pull took about 1 hour (4,180 requests, ~100 MB).
+Reproduce: `python download.py pihps`. It uses 3 parallel requests, one quarter per request (longer ranges get slow server-side), and resumes by skipping files that already exist. A full pull of one commodity set took about 1 hour (4,180 requests, ~100 MB). Files of the current quarter are re-downloaded on every run, which is what keeps the nowcast fresh.
 
 ## Not used (yet)
 

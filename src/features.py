@@ -12,13 +12,21 @@ EID_FITR = pd.to_datetime([
     "2026-03-20", "2027-03-10",
 ])
 
+FOOD = ("rice", "chicken", "egg", "shallot", "chili")
+FOOD_EXTRA = ("beef", "garlic", "bird_chili", "cooking_oil", "sugar")
+
+# The last column of each food group is its missing flag (see build_features).
 FEATURE_GROUPS = {
     "lags": ["inflation_mtm"] + [f"inflation_lag_{k}" for k in range(1, LAGS)],
     "rolling": ["inflation_roll_3", "inflation_roll_6", "inflation_roll_12", "inflation_std_12"],
     "seasonality": ["month_sin", "month_cos", "year_end_flag"],
     "islamic_calendar": ["ramadan_flag", "eid_fitr_flag"],
-    "food_prices": [f"{c}_price_mom" for c in ("rice", "chicken", "egg", "shallot", "chili")],
+    "food_prices": [f"{c}_price_mom" for c in FOOD] + ["food_prices_missing"],
+    "food_prices_extra": [f"{c}_price_mom" for c in FOOD_EXTRA] + ["food_prices_extra_missing"],
+    # first pihps.NOWCAST_DAYS trading days of the target month vs the mean of month t
+    "food_nowcast": [f"{c}_nowcast" for c in FOOD + FOOD_EXTRA] + ["food_nowcast_missing"],
 }
+FOOD_GROUPS = ("food_prices", "food_prices_extra", "food_nowcast")
 
 
 def _month_key(dates):
@@ -27,15 +35,27 @@ def _month_key(dates):
 
 def build_features(panel, prices=None):
     """panel: contiguous monthly rows per city (see data.validate). Rows with gaps in the window get NaN.
-    prices: optional PIHPS monthly means (pihps.load_monthly); without it food features are NaN."""
+    prices: optional PIHPS table (pihps.load_monthly); without it food features are 0 with the missing flag set."""
     out = panel[["city", "date", "inflation_mtm"]].sort_values(["city", "date"]).reset_index(drop=True)
     g = out.groupby("city")["inflation_mtm"]
-    commodities = [c.removesuffix("_price_mom") for c in FEATURE_GROUPS["food_prices"]]
-    priced = out[["city", "date"]].merge(prices, on=["city", "date"], how="left") if prices is not None \
-        else out[["city", "date"]].assign(**{c: np.nan for c in commodities})
+    target_date = out["date"] + pd.offsets.MonthBegin(1)
+    commodities = FOOD + FOOD_EXTRA
+    price_cols = [*commodities, *(f"{c}_first" for c in commodities)]
+    prices = (pd.DataFrame(columns=["city", "date"]) if prices is None else prices) \
+        .reindex(columns=["city", "date", *price_cols]).astype({c: float for c in price_cols})
+    prices["date"] = pd.to_datetime(prices["date"])
+    priced = out[["city", "date"]].merge(prices, on=["city", "date"], how="left")
+    nxt = out[["city"]].assign(date=target_date).merge(prices, on=["city", "date"], how="left")
     for c in commodities:
         # month t mean vs month t-1 mean, both complete before the t+1 target month starts
         out[f"{c}_price_mom"] = priced.groupby("city")[c].pct_change(fill_method=None) * 100
+        out[f"{c}_nowcast"] = (nxt[f"{c}_first"] / priced[c] - 1) * 100
+    # Missing price change -> 0 plus a flag, so rows before PIHPS starts (2017), or before the
+    # nowcast days exist, still train and serve instead of being dropped.
+    for grp in FOOD_GROUPS:
+        *feats, flag = FEATURE_GROUPS[grp]
+        out[flag] = out[feats].isna().any(axis=1).astype(int)
+        out[feats] = out[feats].fillna(0.0)
     for k in range(1, LAGS):
         out[f"inflation_lag_{k}"] = g.shift(k)
     for w in (3, 6, 12):
@@ -43,7 +63,6 @@ def build_features(panel, prices=None):
     out["inflation_std_12"] = g.transform(lambda s: s.rolling(12).std())
 
     # Calendar features describe the target month; they are known in advance.
-    target_date = out["date"] + pd.offsets.MonthBegin(1)
     if target_date.max() > EID_FITR.max():
         raise ValueError("extend EID_FITR before forecasting past it")
     month = target_date.dt.month

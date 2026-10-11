@@ -46,6 +46,22 @@ def test_food_price_change_is_within_city():
                                         shallot=1.0, chili=1.0)
     prices.loc[(prices["city"] == "B") & (prices["date"] == "2015-02-01"), "rice"] = 210.0
     f = build_features(p, prices).set_index(["city", "date"])
-    assert np.isnan(f.loc[("B", pd.Timestamp("2015-01-01")), "rice_price_mom"])  # no cross-city diff
+    b0 = f.loc[("B", pd.Timestamp("2015-01-01"))]
+    assert b0["rice_price_mom"] == 0 and b0["food_prices_missing"] == 1  # no cross-city diff; gap -> 0 + flag
+    assert f.loc[("B", pd.Timestamp("2015-02-01")), "food_prices_missing"] == 0
     assert f.loc[("B", pd.Timestamp("2015-02-01")), "rice_price_mom"] == pytest.approx(5.0)
     assert f.loc[("A", pd.Timestamp("2015-02-01")), "rice_price_mom"] == 0
+
+
+def test_nowcast_uses_first_days_of_target_month_only():
+    p = panel()
+    prices = p[["city", "date"]].assign(rice=100.0, rice_first=np.nan)
+    prices.loc[prices["date"] == "2015-03-01", "rice_first"] = 103.0
+    f = build_features(p, prices).set_index(["city", "date"])
+    feb = f.loc[("A", pd.Timestamp("2015-02-01"))]  # origin Feb, target Mar
+    assert feb["rice_nowcast"] == pytest.approx(3.0)  # flag stays 1: the other commodities are absent
+    mar = f.loc[("A", pd.Timestamp("2015-03-01"))]  # target Apr has no first-days price yet
+    assert mar["rice_nowcast"] == 0 and mar["food_nowcast_missing"] == 1
+    # without any prices every food group is flagged missing and filled with 0
+    bare = build_features(p)
+    assert bare["food_prices_extra_missing"].eq(1).all() and bare["beef_price_mom"].eq(0).all()

@@ -21,7 +21,9 @@ BPS_API = "https://webapi.bps.go.id/v1/api/list/model"
 BPS_VARS = {1: "Inflasi Bulanan (M-to-M), kabupaten/kota"}
 
 PIHPS_API = "https://www.bi.go.id/hargapangan/WebSite/TabelHarga"
-PIHPS_COMMODITIES = "cat_1,cat_2,cat_4,cat_5,cat_7"  # beras, daging ayam, telur ayam, bawang merah, cabai merah
+# file suffix -> categories. The second set was added later, so it lives in its own files and the first pull stays valid.
+PIHPS_COMMODITIES = {"": "cat_1,cat_2,cat_4,cat_5,cat_7",  # beras, daging ayam, telur ayam, bawang merah, cabai merah
+                     "_b": "cat_3,cat_6,cat_8,cat_9,cat_10"}  # daging sapi, bawang putih, cabai rawit, minyak goreng, gula pasir
 PIHPS_START = "2017-07-01"  # city-level series start around 2017-11
 
 
@@ -75,20 +77,20 @@ def download_pihps(workers=3):
 
     # Long ranges get slow server-side; one quarter per request keeps each call ~2-3 s.
     quarters = pd.date_range(PIHPS_START, date.today(), freq="QS")
-    jobs = [(r, q) for r in regencies for q in quarters]
+    jobs = [(r, q, sfx, cats) for sfx, cats in PIHPS_COMMODITIES.items() for r in regencies for q in quarters]
 
     def one(job):
-        r, q = job
-        path = out / f"{r['regency_id']}_{q:%Y-%m}.json"
+        r, q, sfx, cats = job
+        path = out / f"{r['regency_id']}_{q:%Y-%m}{sfx}.json"
         if path.exists() and q + pd.offsets.QuarterEnd() < pd.Timestamp(date.today()):
             return
         end = min(q + pd.offsets.QuarterEnd(), pd.Timestamp(date.today()))
-        params = (f"price_type_id=1&comcat_id={PIHPS_COMMODITIES}&province_id={r['province_id']}"
+        params = (f"price_type_id=1&comcat_id={cats}&province_id={r['province_id']}"
                   f"&regency_id={r['regency_id']}&market_id=&tipe_laporan=1"
                   f"&start_date={q:%Y-%m-%d}&end_date={end:%Y-%m-%d}")
         path.write_text(json.dumps(fetch_json(f"{PIHPS_API}/GetGridDataDaerah?{params}"), ensure_ascii=False))
 
-    print(f"{len(regencies)} regencies x {len(quarters)} quarters")
+    print(f"{len(regencies)} regencies x {len(quarters)} quarters x {len(PIHPS_COMMODITIES)} commodity sets")
     with ThreadPoolExecutor(workers) as ex:
         for i, _ in enumerate(ex.map(one, jobs), 1):
             if i % 100 == 0:

@@ -8,8 +8,11 @@ from src.data import ROOT
 
 PIHPS_DIR = ROOT / "data" / "raw" / "pihps"
 COMMODITIES = {"Beras": "rice", "Daging Ayam": "chicken", "Telur Ayam": "egg",
-               "Bawang Merah": "shallot", "Cabai Merah": "chili"}
+               "Bawang Merah": "shallot", "Cabai Merah": "chili",
+               "Daging Sapi": "beef", "Bawang Putih": "garlic", "Cabai Rawit": "bird_chili",
+               "Minyak Goreng": "cooking_oil", "Gula Pasir": "sugar"}
 MIN_DAYS = 10  # fewer valid trading days in a month -> monthly mean treated as missing
+NOWCAST_DAYS = 5  # first trading days of a month averaged for the nowcast; available by ~the 8th
 
 # CPI city -> PIHPS regency where names differ. DKI Jakarta has a single PIHPS series (Jakarta Pusat);
 # Purwokerto is the capital of Kab. Banyumas.
@@ -33,7 +36,8 @@ def city_mapping(cities, pihps_dir=PIHPS_DIR):
 
 
 def load_monthly(cities, pihps_dir=PIHPS_DIR):
-    """Wide table: city, date, <commodity> monthly mean price (Rp/kg)."""
+    """Wide table: city, date, <commodity> monthly mean price (Rp/kg), <commodity>_first mean of the
+    first NOWCAST_DAYS priced days (NaN until that many days exist)."""
     rows = []
     for city, reg_id in city_mapping(cities, pihps_dir).items():
         for path in pihps_dir.glob(f"{reg_id}_*.json"):
@@ -44,8 +48,14 @@ def load_monthly(cities, pihps_dir=PIHPS_DIR):
                     if day not in ("no", "name", "level") and value != "-":
                         rows.append((city, day, COMMODITIES[r["name"].strip()], float(value.replace(",", ""))))
     daily = pd.DataFrame(rows, columns=["city", "day", "commodity", "price"])
-    daily["date"] = pd.to_datetime(daily["day"], format="%d/%m/%Y").dt.to_period("M").dt.to_timestamp()
-    daily = daily.drop_duplicates(["city", "day", "commodity"])
-    monthly = daily.groupby(["city", "date", "commodity"])["price"].agg(["mean", "count"])
+    daily["day"] = pd.to_datetime(daily["day"], format="%d/%m/%Y")
+    daily["date"] = daily["day"].dt.to_period("M").dt.to_timestamp()
+    daily = daily.drop_duplicates(["city", "day", "commodity"]).sort_values("day")
+    keys = ["city", "date", "commodity"]
+    monthly = daily.groupby(keys)["price"].agg(["mean", "count"])
     monthly.loc[monthly["count"] < MIN_DAYS, "mean"] = float("nan")
-    return monthly["mean"].unstack("commodity").reset_index().rename_axis(columns=None)
+    first = daily[daily.groupby(keys).cumcount() < NOWCAST_DAYS].groupby(keys)["price"].agg(["mean", "count"])
+    first.loc[first["count"] < NOWCAST_DAYS, "mean"] = float("nan")
+    wide = pd.concat([monthly["mean"].unstack("commodity"),
+                      first["mean"].unstack("commodity").add_suffix("_first")], axis=1)
+    return wide.reset_index().rename_axis(columns=None)

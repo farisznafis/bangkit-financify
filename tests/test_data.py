@@ -70,3 +70,6 @@ def test_pihps_monthly_mean_mapping_and_sparse_months(tmp_path):
     assert m[("CIREBON", pd.Timestamp("2025-01-01"))] == 210_000  # Kota, not Kab., level-1 row
     assert m[("PURWOKERTO", pd.Timestamp("2025-01-01"))] == 310_000
     assert np.isnan(m[("CIREBON", pd.Timestamp("2025-02-01"))])  # 1 trading day < MIN_DAYS
+    first = load_monthly(["CIREBON"], tmp_path).set_index("date")["chili_first"]
+    assert first[pd.Timestamp("2025-01-01")] == 210_000  # mean of the first NOWCAST_DAYS days
+    assert np.isnan(first[pd.Timestamp("2025-02-01")])  # 1 day < NOWCAST_DAYS

@@ -1,36 +1,51 @@
 {
   "split": {
-    "train_end": "2023-12",
+    "val_years": [
+      2021,
+      2022,
+      2023,
+      2024
+    ],
     "val_end": "2024-12",
     "test_end": "2026-09",
     "rows": {
-      "train": 13464,
-      "val": 984,
+      "dev": 14448,
+      "cv_val": 3936,
       "test": 1722
     }
   },
   "validation": {
     "naive": {
-      "mae": 0.3797,
-      "rmse": 0.5408,
-      "n": 984
+      "mae": 0.4707,
+      "rmse": 0.673,
+      "n": 3936
     },
     "seasonal_naive": {
-      "mae": 0.3719,
-      "rmse": 0.5102,
-      "n": 984
+      "mae": 0.4708,
+      "rmse": 0.6259,
+      "n": 3936
     },
     "ridge": {
-      "mae": 0.2856,
-      "rmse": 0.3923,
-      "n": 984,
-      "n_train": 6202
+      "mae": 0.3275,
+      "rmse": 0.456,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2627,
+        "2022": 0.5037,
+        "2023": 0.2596,
+        "2024": 0.284
+      }
     },
     "hist_gbr": {
-      "mae": 0.3051,
-      "rmse": 0.409,
-      "n": 984,
-      "n_train": 6202
+      "mae": 0.3267,
+      "rmse": 0.4612,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2595,
+        "2022": 0.502,
+        "2023": 0.2649,
+        "2024": 0.2805
+      }
     }
   },
   "ablation": [
@@ -39,10 +54,15 @@
       "groups": [
         "lags"
       ],
-      "mae": 0.3518,
-      "rmse": 0.4475,
-      "n": 984,
-      "n_train": 13464,
+      "mae": 0.3798,
+      "rmse": 0.5016,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.3092,
+        "2022": 0.5638,
+        "2023": 0.2945,
+        "2024": 0.3518
+      },
       "kept": true
     },
     {
@@ -51,52 +71,105 @@
         "lags",
         "rolling"
       ],
-      "mae": 0.3511,
-      "rmse": 0.4469,
-      "n": 984,
-      "n_train": 13464,
-      "kept": true
+      "mae": 0.3799,
+      "rmse": 0.5016,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.3101,
+        "2022": 0.5639,
+        "2023": 0.2945,
+        "2024": 0.3511
+      },
+      "kept": false
     },
     {
       "model": "ridge",
       "groups": [
         "lags",
-        "rolling",
         "seasonality"
       ],
-      "mae": 0.3501,
-      "rmse": 0.4471,
-      "n": 984,
-      "n_train": 13464,
-      "kept": true
+      "mae": 0.3814,
+      "rmse": 0.5036,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2995,
+        "2022": 0.5711,
+        "2023": 0.3038,
+        "2024": 0.3511
+      },
+      "kept": false
     },
     {
       "model": "ridge",
       "groups": [
         "lags",
-        "rolling",
-        "seasonality",
         "islamic_calendar"
       ],
-      "mae": 0.3191,
-      "rmse": 0.419,
-      "n": 984,
-      "n_train": 13464,
+      "mae": 0.3759,
+      "rmse": 0.4974,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.3221,
+        "2022": 0.5414,
+        "2023": 0.3053,
+        "2024": 0.3348
+      },
       "kept": true
     },
     {
       "model": "ridge",
       "groups": [
         "lags",
-        "rolling",
-        "seasonality",
         "islamic_calendar",
         "food_prices"
       ],
-      "mae": 0.2856,
-      "rmse": 0.3923,
-      "n": 984,
-      "n_train": 6202,
+      "mae": 0.362,
+      "rmse": 0.4978,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2827,
+        "2022": 0.5838,
+        "2023": 0.2797,
+        "2024": 0.3017
+      },
+      "kept": true
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "islamic_calendar",
+        "food_prices",
+        "food_prices_extra"
+      ],
+      "mae": 0.3626,
+      "rmse": 0.5031,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2835,
+        "2022": 0.5834,
+        "2023": 0.2814,
+        "2024": 0.3021
+      },
+      "kept": false
+    },
+    {
+      "model": "ridge",
+      "groups": [
+        "lags",
+        "islamic_calendar",
+        "food_prices",
+        "food_nowcast"
+      ],
+      "mae": 0.3275,
+      "rmse": 0.456,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2627,
+        "2022": 0.5037,
+        "2023": 0.2596,
+        "2024": 0.284
+      },
       "kept": true
     },
     {
@@ -104,10 +177,15 @@
       "groups": [
         "lags"
       ],
-      "mae": 0.3318,
-      "rmse": 0.4372,
-      "n": 984,
-      "n_train": 13464,
+      "mae": 0.3811,
+      "rmse": 0.5141,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2895,
+        "2022": 0.6063,
+        "2023": 0.2967,
+        "2024": 0.3318
+      },
       "kept": true
     },
     {
@@ -116,69 +194,128 @@
         "lags",
         "rolling"
       ],
-      "mae": 0.3316,
-      "rmse": 0.4365,
-      "n": 984,
-      "n_train": 13464,
-      "kept": true
-    },
-    {
-      "model": "hist_gbr",
-      "groups": [
-        "lags",
-        "rolling",
-        "seasonality"
-      ],
-      "mae": 0.3379,
-      "rmse": 0.4525,
-      "n": 984,
-      "n_train": 13464,
+      "mae": 0.3824,
+      "rmse": 0.5167,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2859,
+        "2022": 0.612,
+        "2023": 0.2999,
+        "2024": 0.3316
+      },
       "kept": false
     },
     {
       "model": "hist_gbr",
       "groups": [
         "lags",
-        "rolling",
-        "islamic_calendar"
+        "seasonality"
       ],
-      "mae": 0.3178,
-      "rmse": 0.4298,
-      "n": 984,
-      "n_train": 13464,
+      "mae": 0.369,
+      "rmse": 0.5021,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2763,
+        "2022": 0.5615,
+        "2023": 0.2868,
+        "2024": 0.3512
+      },
       "kept": true
     },
     {
       "model": "hist_gbr",
       "groups": [
         "lags",
-        "rolling",
+        "seasonality",
+        "islamic_calendar"
+      ],
+      "mae": 0.3559,
+      "rmse": 0.4871,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2709,
+        "2022": 0.5417,
+        "2023": 0.2897,
+        "2024": 0.3215
+      },
+      "kept": true
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "seasonality",
         "islamic_calendar",
         "food_prices"
       ],
-      "mae": 0.3051,
-      "rmse": 0.409,
-      "n": 984,
-      "n_train": 6202,
+      "mae": 0.3485,
+      "rmse": 0.4869,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2666,
+        "2022": 0.5501,
+        "2023": 0.2663,
+        "2024": 0.311
+      },
+      "kept": true
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "seasonality",
+        "islamic_calendar",
+        "food_prices",
+        "food_prices_extra"
+      ],
+      "mae": 0.3488,
+      "rmse": 0.485,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2746,
+        "2022": 0.5514,
+        "2023": 0.2692,
+        "2024": 0.3001
+      },
+      "kept": false
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "seasonality",
+        "islamic_calendar",
+        "food_prices",
+        "food_nowcast"
+      ],
+      "mae": 0.3267,
+      "rmse": 0.4612,
+      "n": 3936,
+      "mae_by_year": {
+        "2021": 0.2595,
+        "2022": 0.502,
+        "2023": 0.2649,
+        "2024": 0.2805
+      },
       "kept": true
     }
   ],
   "selected_groups": {
     "ridge": [
       "lags",
-      "rolling",
-      "seasonality",
       "islamic_calendar",
-      "food_prices"
+      "food_prices",
+      "food_nowcast"
     ],
     "hist_gbr": [
       "lags",
-      "rolling",
+      "seasonality",
       "islamic_calendar",
-      "food_prices"
+      "food_prices",
+      "food_nowcast"
     ]
   },
-  "selected_model": "ridge",
+  "selected_model": "hist_gbr",
   "test": {
     "naive": {
       "mae": 0.6942,
@@ -191,76 +328,76 @@
       "n": 1722
     },
     "ridge": {
-      "mae": 0.4943,
-      "rmse": 0.6633,
+      "mae": 0.4221,
+      "rmse": 0.5931,
       "n": 1722
     },
     "hist_gbr": {
-      "mae": 0.5138,
-      "rmse": 0.6888,
+      "mae": 0.4377,
+      "rmse": 0.6187,
       "n": 1722
     }
   },
   "test_ablation_diagnostic": [
     {
-      "model": "ridge",
+      "model": "hist_gbr",
       "groups": [
         "lags"
       ],
-      "mae": 0.488,
-      "rmse": 0.6572,
+      "mae": 0.5035,
+      "rmse": 0.6781,
       "n": 1722,
       "n_train": 14448
     },
     {
-      "model": "ridge",
+      "model": "hist_gbr",
       "groups": [
         "lags",
-        "rolling"
-      ],
-      "mae": 0.4873,
-      "rmse": 0.6563,
-      "n": 1722,
-      "n_train": 14448
-    },
-    {
-      "model": "ridge",
-      "groups": [
-        "lags",
-        "rolling",
         "seasonality"
       ],
-      "mae": 0.4704,
-      "rmse": 0.644,
+      "mae": 0.4939,
+      "rmse": 0.6689,
       "n": 1722,
       "n_train": 14448
     },
     {
-      "model": "ridge",
+      "model": "hist_gbr",
       "groups": [
         "lags",
-        "rolling",
         "seasonality",
         "islamic_calendar"
       ],
-      "mae": 0.4664,
-      "rmse": 0.623,
+      "mae": 0.4927,
+      "rmse": 0.6659,
       "n": 1722,
       "n_train": 14448
     },
     {
-      "model": "ridge",
+      "model": "hist_gbr",
       "groups": [
         "lags",
-        "rolling",
         "seasonality",
         "islamic_calendar",
         "food_prices"
       ],
-      "mae": 0.4943,
-      "rmse": 0.6633,
+      "mae": 0.4987,
+      "rmse": 0.6773,
       "n": 1722,
-      "n_train": 7186
+      "n_train": 14448
+    },
+    {
+      "model": "hist_gbr",
+      "groups": [
+        "lags",
+        "seasonality",
+        "islamic_calendar",
+        "food_prices",
+        "food_nowcast"
+      ],
+      "mae": 0.4377,
+      "rmse": 0.6187,
+      "n": 1722,
+      "n_train": 14448
     }
   ]
 }

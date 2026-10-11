@@ -1,7 +1,8 @@
-"""Audit data, run baselines + feature-group ablation on validation, fit the selected model, score it once on test."""
+"""Audit data, run baselines + feature-group ablation on rolling-origin validation, fit the selected model, score it once on test."""
 import json
 
 import joblib
+import numpy as np
 import pandas as pd
 
 from src.data import (ROOT, MIN_VALID_MONTHS, clean, combine, coverage_report, load_bps, load_raw,
@@ -9,7 +10,7 @@ from src.data import (ROOT, MIN_VALID_MONTHS, clean, combine, coverage_report, l
 from src.features import FEATURE_GROUPS, build_features, columns
 from src.models import BASELINES, CANDIDATES, metrics
 from src.pihps import load_monthly
-from src.split import TRAIN_END, VAL_END, split
+from src.split import VAL_END, VAL_YEARS, folds, split
 
 METRICS_DIR = ROOT / "artifacts" / "metrics"
 MODEL_PATH = ROOT / "artifacts" / "model.joblib"
@@ -18,14 +19,19 @@ PRICES_PATH = ROOT / "data" / "processed" / "food_prices.csv"
 
 
 def fit(name, cols, rows):
-    # each config trains on every row it has data for (food prices only exist from 2017)
-    rows = rows.dropna(subset=cols)
     return CANDIDATES[name]().fit(rows[cols], rows["target_inflation"]), len(rows)
 
 
 def fit_score(name, cols, fit_rows, eval_rows):
     model, n_train = fit(name, cols, fit_rows)
     return model, {**metrics(eval_rows["target_inflation"], model.predict(eval_rows[cols])), "n_train": n_train}
+
+
+def cv_score(name, cols, cv):
+    """Metrics pooled over every fold's predictions, plus MAE per validation year."""
+    preds = [(va["target_inflation"], fit(name, cols, tr)[0].predict(va[cols])) for _, tr, va in cv]
+    return {**metrics(pd.concat([y for y, _ in preds]), np.concatenate([p for _, p in preds])),
+            "mae_by_year": {year: metrics(y, p)["mae"] for (year, _, _), (y, p) in zip(cv, preds)}}
 
 
 def main():
@@ -49,27 +55,29 @@ def main():
     prices = load_monthly(keep)
     prices.to_csv(PRICES_PATH, index=False, date_format="%Y-%m-%d")
 
-    # Phase 3-6: val/test rows have every candidate feature, so all configs are scored on the same rows
-    feats = build_features(panel, prices)
-    all_cols = columns(FEATURE_GROUPS)
-    train, val, test = split(feats.dropna(subset=columns([g for g in FEATURE_GROUPS if g != "food_prices"])))
-    val, test = val.dropna(subset=all_cols), test.dropna(subset=all_cols)
-    assert train["target_date"].max() < val["target_date"].min() <= val["target_date"].max() < test["target_date"].min()
-    print(f"train {len(train)} | val {len(val)} | test {len(test)} rows")
+    # Phase 3-6: every row has every candidate feature (missing food prices are 0 + flag),
+    # so all configs train and score on the same rows.
+    feats = build_features(panel, prices).dropna(subset=columns(FEATURE_GROUPS))
+    dev, test = split(feats)
+    cv = folds(dev)
+    assert all(tr["target_date"].max() < va["target_date"].min() for _, tr, va in cv)
+    assert dev["target_date"].max() < test["target_date"].min()
+    cv_val = pd.concat([va for _, _, va in cv])
+    print(f"dev {len(dev)} | cv val {len(cv_val)} ({VAL_YEARS[0]}-{VAL_YEARS[-1]}) | test {len(test)} rows")
 
-    results = {"split": {"train_end": TRAIN_END.strftime("%Y-%m"), "val_end": VAL_END.strftime("%Y-%m"),
+    results = {"split": {"val_years": list(VAL_YEARS), "val_end": VAL_END.strftime("%Y-%m"),
                          "test_end": test["target_date"].max().strftime("%Y-%m"),
-                         "rows": {"train": len(train), "val": len(val), "test": len(test)}},
-               "validation": {name: metrics(val["target_inflation"], f(val)) for name, f in BASELINES.items()},
+                         "rows": {"dev": len(dev), "cv_val": len(cv_val), "test": len(test)}},
+               "validation": {name: metrics(cv_val["target_inflation"], f(cv_val)) for name, f in BASELINES.items()},
                "ablation": [], "selected_groups": {}}
 
-    # Greedy forward selection: a feature group stays only if it lowers validation MAE.
+    # Greedy forward selection: a feature group stays only if it lowers pooled rolling-origin MAE.
     for name in CANDIDATES:
         groups = ["lags"]
-        best = fit_score(name, columns(groups), train, val)[1]
+        best = cv_score(name, columns(groups), cv)
         results["ablation"].append({"model": name, "groups": list(groups), **best, "kept": True})
         for grp in [g for g in FEATURE_GROUPS if g != "lags"]:
-            score = fit_score(name, columns(groups + [grp]), train, val)[1]
+            score = cv_score(name, columns(groups + [grp]), cv)
             kept = score["mae"] < best["mae"]
             results["ablation"].append({"model": name, "groups": groups + [grp], **score, "kept": kept})
             if kept:
@@ -80,19 +88,18 @@ def main():
     selected = min(CANDIDATES, key=lambda n: results["validation"][n]["mae"])
     results["selected_model"] = selected
 
-    # Phase 8: refit on train+val, score once on the untouched test period
-    train_val = pd.concat([train, val])
+    # Phase 8: refit on all dev rows, score once on the untouched test period
     preds = test[["city", "date", "target_date", "target_inflation"]].copy()
     for name, f in BASELINES.items():
         preds[name] = f(test)
     for name in CANDIDATES:
         cols = columns(results["selected_groups"][name])
-        model = fit(name, cols, train_val)[0]
+        model = fit(name, cols, dev)[0]
         preds[name] = model.predict(test[cols])
     results["test"] = {n: metrics(preds["target_inflation"], preds[n]) for n in [*BASELINES, *CANDIDATES]}
     # Diagnostic only (selection above never sees test): how each kept ablation step of the selected model does on test.
     results["test_ablation_diagnostic"] = [
-        {"model": selected, "groups": a["groups"], **fit_score(selected, columns(a["groups"]), train_val, test)[1]}
+        {"model": selected, "groups": a["groups"], **fit_score(selected, columns(a["groups"]), dev, test)[1]}
         for a in results["ablation"] if a["model"] == selected and a["kept"]]
     preds.to_csv(METRICS_DIR / "test_predictions.csv", index=False, date_format="%Y-%m")
     (METRICS_DIR / "metrics.json").write_text(json.dumps(results, indent=2))
@@ -100,7 +107,7 @@ def main():
     # Phase 9: same model + feature config refitted on every labeled row; this fitted pipeline
     # (scaler included) is what the API serves. Test metrics above describe this procedure.
     cols = columns(results["selected_groups"][selected])
-    everything = pd.concat([train_val, test])
+    everything = pd.concat([dev, test])
     model = fit(selected, cols, everything)[0]
     joblib.dump({"model": model, "features": cols, "model_name": selected,
                  "trained_on_targets_through": everything["target_date"].max().strftime("%Y-%m"),
